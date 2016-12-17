@@ -1,0 +1,46 @@
+Zadanie TODO (Jira, TFS)
+
+1) 
+Item
+Item to zadanie, ma typ: (Bug, Task, Feature - inne kolory), priorytet (1-5) oraz severity (1-3), tytu³, treœæ oraz tagi.
+Dodatkowo task mo¿e mieæ wykonawcê (musi go miec w stanie != NEW) oraz jest przypisany do danej kolumny (NEW, ACTIVE, RESOLVED) {CLOSED}
+Ponadto ma pola: original estimate (mozna modyfikowac tylko w stanie NEW), remaining time, completed
+
+id
+title
+body
+type
+priority
+severity
+tags
+assigned to (userId)
+state (columnId)
+created
+modified
+discussion*
+createdBy*
+modifiedBy*
+
+2) Dashboard - ma n-kolumn (NEW, ACTIVE, RESOLVED, CLOSED); lista itemow
+Kazda kolumna powinna prezentowac ile jeszcze pracy jest do wykonania
+
+NEW - zadania posortowane po priority ASC, severity ASC, created DESC
+ACTIVE - zadania w trakcie
+RESOLVED - zadania zakonczone
+
+3) User - pracownik, ma id, login, moze miec awatar/foto
+
+4) Historia itemow/flow
+- zadanie tworzymy zawsze jako NEW
+- potem zadanie wedruje po kolumnach i zmienia stan
+- zadanie moze zmienic wykonawce
+- do zadania przypisujemy estymacje
+- zadanie powinno miec swoja historie*:
+    1) NEW -> ACTIVE -> RESOLVED -> ACTIVE -> RESOLVED {-> CLOSED}
+    2) created -> assign to Tomek -> estimated -> change fields -> ACTIVE -> add comment/discussion -> RESOLVED
+
+5) Kierunki rozwoju*
+* mozna dodac iteracje
+* mozna dodac prezentacje ile dany user zrobil zadan
+* mozna dodac jak estymowal, a ile faktycznie zajelo mu zrobienie zadania
+* mozna dodac user story
