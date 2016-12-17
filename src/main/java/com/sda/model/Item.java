@@ -1,27 +1,28 @@
 package com.sda.model;
 
-import com.sda.enums.ItemType;
+import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Entity;
+
+import com.sda.enums.ItemType;
+import com.sda.enums.State;
+
+@Entity
 public class Item {
 	private int id;
 	private String title;
 	private String body;
 	private ItemType type;
-	int priority;
-	int severity;
-	User assignedTo;
+	private int priority;
+	private int severity;
+	private List<String> tags;
+	private User assignedTo;
+	private State state;
+	private LocalDate created;
+	private LocalDate modified;
+	private int originalEstimate;
+	private int remainingHours;
+	private int completedHours;
 
-	public Item() {}
-	
-	public Item(String title, String body, ItemType type, int priority, int severity, User assignedTo) {
-		super();
-		this.title = title;
-		this.body = body;
-		this.type = type;
-		this.priority = priority;
-		this.severity = severity;
-		this.assignedTo = assignedTo;
-	}
-	
-	
 }
