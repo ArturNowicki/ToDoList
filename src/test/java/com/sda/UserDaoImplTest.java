@@ -1,14 +1,21 @@
 package com.sda;
 
 import com.sda.model.User;
+import org.junit.Assert;
 import org.junit.Test;
+
+import javax.validation.constraints.AssertTrue;
 
 public class UserDaoImplTest {
 
     @Test
     public void addUserToDb() {
-        User user1 = new User();
+        UserDao userDao = new UserDaoImpl();
+        String login = "czarek";
+        User user = new User(login);
+        userDao.saveUser(user);
 
+        userDao.findByLogin("czarek");
 
     }
 
