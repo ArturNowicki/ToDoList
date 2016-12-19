@@ -1,17 +1,18 @@
 package com.sda;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.sda.model.User;
 
 public interface UserDao {
-    User findById(int id);
+    Optional<User> findById(int id);
     
     User findByLogin(String login);
 
     void saveUser(User user);
 
-    void deleteUserById(int id);
+    boolean deleteUserById(int id);
 
     List<User> findAllUsers();
 }

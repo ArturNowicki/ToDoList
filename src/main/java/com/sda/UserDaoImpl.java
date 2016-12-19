@@ -1,6 +1,7 @@
 package com.sda;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -10,7 +11,7 @@ import com.sda.model.User;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
 	@Override
-	public User findById(int id) {
+	public Optional<User> findById(int id) {
 		return getByKey(id);
 	}
 
@@ -20,10 +21,16 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 	}
 
 	@Override
-	public void deleteUserById(int id) {
-		delete(getByKey(id));
+	public boolean deleteUserById(int id) {
+		Optional<User> maybeUser = getByKey(id);
+		if(maybeUser.isPresent()) {
+			delete(maybeUser.get());
+			return true;
+		}
+		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findAllUsers() {
 		Criteria criteria = createEntityCriteria();
