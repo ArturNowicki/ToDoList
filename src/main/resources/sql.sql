@@ -38,3 +38,8 @@ CREATE TABLE Item(
     CONSTRAINT FOREIGN KEY (userId) REFERENCES User (id)
 
 );
+
+INSERT INTO user (login) values ('Artur'), ('Daniel');
+select * from user;
+
+INSERT INTO Tags (name) VALUES ('difficult'), ('urgent'),  ('returned');
