@@ -1,4 +1,4 @@
-package com.sda;
+package com.sda.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

@@ -1,5 +1,7 @@
-package com.sda;
+package com.sda.dao;
 
+import com.sda.dao.UserDao;
+import com.sda.dao.UserDaoImpl;
 import com.sda.model.User;
 import org.junit.Test;
 

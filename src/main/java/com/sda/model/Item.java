@@ -9,8 +9,6 @@ import javax.persistence.Table;
 import com.sda.enums.ItemType;
 import com.sda.enums.State;
 
-@Entity
-@Table(name = "item")
 public class Item {
 	private int id;
 	private String title;

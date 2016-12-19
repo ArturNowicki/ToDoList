@@ -1,13 +1,15 @@
-package com.sda;
+package com.sda.dao;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.sda.model.User;
 
+@Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
 	@Override
