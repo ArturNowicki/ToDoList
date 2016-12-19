@@ -1,5 +1,7 @@
 use todo_list;
 
+drop table if exists Item;
+drop table if exists Tags;
 drop table if exists User;
 CREATE TABLE User(
     id INT(10) NOT NULL auto_increment, 
@@ -8,7 +10,6 @@ CREATE TABLE User(
     UNIQUE KEY (login)
 );
 
-drop table if exists Tags;
 CREATE TABLE Tags(
     id INT(10) NOT NULL auto_increment,
     name VARCHAR(50) NOT NULL,
@@ -16,7 +17,6 @@ CREATE TABLE Tags(
     UNIQUE KEY (name)
 );
 
-drop table if exists Item;
 CREATE TABLE Item(
     id INT(10) NOT NULL auto_increment,
     title VARCHAR(50) NOT NULL,
