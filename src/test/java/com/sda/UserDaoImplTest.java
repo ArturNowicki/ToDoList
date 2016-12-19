@@ -1,10 +1,9 @@
 package com.sda;
 
 import com.sda.model.User;
-import org.junit.Assert;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
+import static org.testng.Assert.assertEquals;
 
 public class UserDaoImplTest {
 
@@ -15,7 +14,12 @@ public class UserDaoImplTest {
         User user = new User(login);
         userDao.saveUser(user);
 
-        userDao.findByLogin("czarek");
+        User user1 = userDao.findByLogin("czarek");
+
+        assertEquals(user, user1);
+
+
+
 
     }
 
