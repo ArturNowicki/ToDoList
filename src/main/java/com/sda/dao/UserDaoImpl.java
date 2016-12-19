@@ -18,7 +18,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
 	@Override
 	public void deleteUserById(int id) {
-		de
+
 	}
 
 	@Override
