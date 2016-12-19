@@ -6,6 +6,8 @@ import com.sda.model.User;
 
 public interface UserDao {
     User findById(int id);
+    
+    User findByLogin(String login);
 
     void saveUser(User user);
 
