@@ -17,13 +17,14 @@ import com.sda.service.UserService;
 @RequestMapping("/")
 public class AppController {
 
+
     @Autowired
     UserService userService;
 
     @Autowired
     ItemService itemService;
 
-    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/userslist"}, method = RequestMethod.GET)
     public String listUsers(ModelMap model) {
         List<User> users = userService.findAllUsers();
         model.addAttribute("user", users);
