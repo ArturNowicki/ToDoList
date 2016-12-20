@@ -1,24 +1,27 @@
 package com.sda.dao;
 
-import com.sda.dao.UserDao;
-import com.sda.dao.UserDaoImpl;
-import com.sda.model.User;
-import org.junit.Test;
-
 import static org.testng.Assert.assertEquals;
 
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sda.model.User;
+
 public class UserDaoImplTest {
+	
+	@Autowired
+	UserDao userDao;
 
     @Test
     public void addUserToDb() {
-        UserDao userDao = new UserDaoImpl();
-        String login = "czarek";
+    	String userName = "czarek";
+        String login = userName;
         User user = new User(login);
         userDao.saveUser(user);
 
-        User user1 = userDao.findByLogin("czarek");
+        User userFromDB = userDao.findByLogin(userName);
 
-        assertEquals(user, user1);
+        assertEquals(user, userFromDB);
 
 
 
