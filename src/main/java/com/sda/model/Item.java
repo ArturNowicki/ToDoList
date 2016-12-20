@@ -52,24 +52,24 @@ public class Item {
     private List<Tag> tags = new ArrayList<Tag>();
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private User assignedTo;
+    private User assignedUser;
 
-    @Column(name = "state", nullable = false, length = 50)
+    @Column(name = "state", nullable = false)
     private State state;
 
-    @Column(name = "created", nullable = false, length = 50)
+    @Column(name = "created", nullable = false)
     private LocalDate created;
 
-    @Column(name = "modified", nullable = false, length = 50)
+    @Column(name = "modified", nullable = false)
     private LocalDate modified;
 
-    @Column(name = "originalEstimate", nullable = false, length = 50)
+    @Column(name = "originalEstimate", nullable = false)
     private int originalEstimate;
 
-    @Column(name = "remainingHours", nullable = false, length = 50)
+    @Column(name = "remainingHours", nullable = false)
     private int remainingHours;
 
-    @Column(name = "completedHours", nullable = false, length = 50)
+    @Column(name = "completedHours", nullable = false)
     private int completedHours;
 
     public int getId() {
@@ -129,11 +129,11 @@ public class Item {
     }
 
     public User getAssignedTo() {
-        return assignedTo;
+        return assignedUser;
     }
 
     public void setAssignedTo(User assignedTo) {
-        this.assignedTo = assignedTo;
+        this.assignedUser = assignedTo;
     }
 
     public State getState() {
@@ -187,7 +187,7 @@ public class Item {
     @Override
     public String toString() {
         return "Item [id=" + id + ", title=" + title + ", body=" + body + ", type=" + type + ", priority=" + priority
-                + ", severity=" + severity + ", tags=" + tags + ", assignedTo=" + assignedTo + ", state=" + state
+                + ", severity=" + severity + ", tags=" + tags + ", assignedTo=" + assignedUser + ", state=" + state
                 + ", created=" + created + ", modified=" + modified + ", originalEstimate=" + originalEstimate
                 + ", remainingHours=" + remainingHours + ", completedHours=" + completedHours + "]";
     }
