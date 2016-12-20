@@ -18,7 +18,7 @@ public class AppController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/userslist"}, method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 		List<User> users = userService.findAllUsers();
 		model.addAttribute("user", users);
