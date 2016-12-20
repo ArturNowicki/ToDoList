@@ -12,4 +12,7 @@ public interface ItemDao {
 
     List<Item> listItems();
 
+    boolean editItem(Item item);
+
+    void changeState();
 }

@@ -15,13 +15,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public boolean editItem(Item item) {
-        Optional<Item> maybeItem = dao.findById(item.getId());
-        if(maybeItem.isPresent()) {
-            Item editedItem = maybeItem.get();
-            editedItem.setLogin(item.getLogin());
-            return true;
-        }
-        return false;
+        return dao.editItem(item);
     }
 
     @Override

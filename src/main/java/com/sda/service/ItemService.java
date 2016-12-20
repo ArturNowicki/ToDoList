@@ -5,9 +5,6 @@ import com.sda.model.User;
 
 import java.util.List;
 
-/**
- * Created by RENT on 2016-12-20.
- */
 public interface ItemService {
 
     boolean editItem(Item item);

@@ -45,6 +45,4 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 		criteria.add(Restrictions.eq("login", login));
 		return (User) criteria.uniqueResult();
 	}
-
-	
 }
