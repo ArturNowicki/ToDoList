@@ -43,9 +43,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-		
+	public boolean updateUser(User user) {
+		Optional<User> maybeUser = dao.findById(user.getId());
+		if(maybeUser.isPresent()) {
+			User updatedUser = maybeUser.get();
+			updatedUser.setLogin(user.getLogin());
+			return true;
+		}
+		return false;
 	}
 
 }

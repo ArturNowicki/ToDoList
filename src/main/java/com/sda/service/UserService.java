@@ -17,5 +17,5 @@ public interface UserService {
 
     List<User> findAllUsers();
     
-    void updateUser(User user);
+    boolean updateUser(User user);
 }
