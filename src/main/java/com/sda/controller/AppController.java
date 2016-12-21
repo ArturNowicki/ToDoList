@@ -38,7 +38,7 @@ public class AppController {
         return "allitems";
     }
 
-    @RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/dashboard"}, method = RequestMethod.GET)
     public String listDashboard(ModelMap model) {
         List<Item> items = itemService.listAll();
         model.addAttribute("item", items);
