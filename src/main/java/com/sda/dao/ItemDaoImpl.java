@@ -30,6 +30,8 @@ public class ItemDaoImpl extends AbstractDao<Integer, Item> implements ItemDao {
 	@Override
 	public List<Item> listAll() {
 		Criteria criteria = createEntityCriteria();
+		List<Item> itemsList = (List<Item>) criteria.list();
+		itemsList.get(0).toString();
 		return (List<Item>) criteria.list();
 	}
 

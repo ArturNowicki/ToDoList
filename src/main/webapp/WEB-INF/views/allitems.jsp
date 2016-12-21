@@ -11,13 +11,11 @@
 	<h2>List of Items</h2>
 	<table>
 		<tr>
-			<td>ID</td>
 			<td>NAME</td>
 			<td></td>
 		</tr>
-		<c:forEach items="${item}" var="user">
+		<c:forEach items="${item}" var="item">
 			<tr>
-				<td>${item.id}</td>
 				<td>${item.title}</td>
 			</tr>
 		</c:forEach>

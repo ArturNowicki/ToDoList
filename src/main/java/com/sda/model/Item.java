@@ -1,6 +1,6 @@
 package com.sda.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, unique = true, length = 10)
+    @Column(name = "id", nullable = false, unique = true, length = 11)
     private int id;
 
     @Column(name = "title", nullable = false, length = 50)
@@ -46,10 +46,10 @@ public class Item {
     @Column(name = "severity", nullable = false, length = 1)
     private int severity;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "itemTags")
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "itemTags")
 //    private List<Tag> tags = new ArrayList<Tag>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User assignedUser;
 
@@ -57,10 +57,10 @@ public class Item {
     private State state;
 
     @Column(name = "created", nullable = false)
-    private LocalDate created;
+    private Date created;
 
     @Column(name = "modified", nullable = false)
-    private LocalDate modified;
+    private Date modified;
 
     @Column(name = "originalEstimate", nullable = false)
     private int originalEstimate;
@@ -72,118 +72,110 @@ public class Item {
     private int completedHours;
 
     public int getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getBody() {
-        return body;
-    }
+	public String getBody() {
+		return body;
+	}
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+	public void setBody(String body) {
+		this.body = body;
+	}
 
-    public ItemType getType() {
-        return type;
-    }
+	public ItemType getType() {
+		return type;
+	}
 
-    public void setType(ItemType type) {
-        this.type = type;
-    }
+	public void setType(ItemType type) {
+		this.type = type;
+	}
 
-    public int getPriority() {
-        return priority;
-    }
+	public int getPriority() {
+		return priority;
+	}
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
 
-    public int getSeverity() {
-        return severity;
-    }
+	public int getSeverity() {
+		return severity;
+	}
 
-    public void setSeverity(int severity) {
-        this.severity = severity;
-    }
+	public void setSeverity(int severity) {
+		this.severity = severity;
+	}
 
-//    public List<Tag> getTags() {
-//        return tags;
-//    }
-//
-//    public void setTags(List<Tag> tags) {
-//        this.tags = tags;
-//    }
+	public User getAssignedUser() {
+		return assignedUser;
+	}
 
-    public User getAssignedTo() {
-        return assignedUser;
-    }
+	public void setAssignedUser(User assignedUser) {
+		this.assignedUser = assignedUser;
+	}
 
-    public void setAssignedTo(User assignedTo) {
-        this.assignedUser = assignedTo;
-    }
+	public State getState() {
+		return state;
+	}
 
-    public State getState() {
-        return state;
-    }
+	public void setState(State state) {
+		this.state = state;
+	}
 
-    public void setState(State state) {
-        this.state = state;
-    }
+	public Date getCreated() {
+		return created;
+	}
 
-    public LocalDate getCreated() {
-        return created;
-    }
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
+	public Date getModified() {
+		return modified;
+	}
 
-    public LocalDate getModified() {
-        return modified;
-    }
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
 
-    public void setModified(LocalDate modified) {
-        this.modified = modified;
-    }
+	public int getOriginalEstimate() {
+		return originalEstimate;
+	}
 
-    public int getOriginalEstimate() {
-        return originalEstimate;
-    }
+	public void setOriginalEstimate(int originalEstimate) {
+		this.originalEstimate = originalEstimate;
+	}
 
-    public void setOriginalEstimate(int originalEstimate) {
-        this.originalEstimate = originalEstimate;
-    }
+	public int getRemainingHours() {
+		return remainingHours;
+	}
 
-    public int getRemainingHours() {
-        return remainingHours;
-    }
+	public void setRemainingHours(int remainingHours) {
+		this.remainingHours = remainingHours;
+	}
 
-    public void setRemainingHours(int remainingHours) {
-        this.remainingHours = remainingHours;
-    }
+	public int getCompletedHours() {
+		return completedHours;
+	}
 
-    public int getCompletedHours() {
-        return completedHours;
-    }
+	public void setCompletedHours(int completedHours) {
+		this.completedHours = completedHours;
+	}
 
-    public void setCompletedHours(int completedHours) {
-        this.completedHours = completedHours;
-    }
-
-    @Override
+	@Override
     public String toString() {
         return "Item [id=" + id + ", title=" + title + ", body=" + body + ", type=" + type + ", priority=" + priority
                 + ", severity=" + severity

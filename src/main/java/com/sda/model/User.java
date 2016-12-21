@@ -19,7 +19,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true, length = 10)
+	@Column(name = "id", nullable = false, unique = true, length = 11)
 	private int id;
 
 	@Column(name = "login", nullable = false, unique = true, length = 50)
@@ -32,6 +32,10 @@ public class User {
 
 	public User(String login) {
 		this.login = login;
+	}
+
+	public List<Item> getItemsList() {
+		return itemsList;
 	}
 
 	public int getId() {
