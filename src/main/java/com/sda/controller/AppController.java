@@ -31,6 +31,13 @@ public class AppController {
         return "allusers";
     }
 
+    @RequestMapping(value = {"/itemslist"}, method = RequestMethod.GET)
+    public String listItems(ModelMap model) {
+        List<Item> items = itemService.listAll();
+        model.addAttribute("item", items);
+        return "allitems";
+    }
+
     @RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
     public String listDashboard(ModelMap model) {
         List<Item> items = itemService.listAll();

@@ -33,7 +33,7 @@ public class Item {
     @Column(name = "body", length = 50)
     private String body;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "itemType", nullable = false)
     private ItemType type;
 
     @Min(1)

@@ -52,9 +52,9 @@ select * from user;
 
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');
 
-INSERT INTO Item(title, body, itemType, priority, severity, tagId, userId,
+INSERT INTO Item(title, body, itemType, priority, severity, userId,
 	state, created, originalEstimate, remainingHours, completedHours)
-    VALUES ('TestTask', 'First task for system tests', 'TASK', 3, 1, 4, 1,
+    VALUES ('TestTask', 'First task for system tests', 'TASK', 3, 1, 1,
     'NEW', curdate(), 50, 50, 0);
     
 SELECT i.id, i.title, i.body FROM Item i
