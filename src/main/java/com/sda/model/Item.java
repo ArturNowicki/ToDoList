@@ -1,6 +1,8 @@
 package com.sda.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,7 +73,7 @@ public class Item {
     @Column(name = "completedHours", nullable = false)
     private int completedHours;
 
-    public int getId() {
+	public int getId() {
 		return id;
 	}
 

@@ -57,7 +57,13 @@ INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested
 INSERT INTO Item(title, body, itemType, priority, severity, userId,
 	state, created, originalEstimate, remainingHours, completedHours)
     VALUES ('TestTask', 'First task for system tests', 1, 3, 1, 1,
-    0, curdate(), 50, 50, 0);
+    1, curdate(), 50, 50, 0);
+
+INSERT INTO Item(title, body, itemType, priority, severity, userId,
+	state, created, originalEstimate, remainingHours, completedHours)
+    VALUES ('TestTask2', 'Second task for system tests', 2, 2, 2, 2,
+    0, curdate(), 24, 8, 18);
+
     
 SELECT i.id, i.title, i.body FROM Item i
 JOin ItemTags it on it.idItem = i.id ;
