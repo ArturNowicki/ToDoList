@@ -26,7 +26,7 @@
 					<tr>
 						<a href="<c:url value='/new' />">Add New Employee</a>
 					
-						<td><a href="<c:url value='/itemslist?id=${item.id}' /> ">
+						<td><a href="<c:url value='/item-${item.id}' /> ">
 							<div>
 								<p>ID: "${item.id}"</p>
 								<p>Title: "${item.title}"</p>
