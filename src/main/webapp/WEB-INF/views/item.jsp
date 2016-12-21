@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h2>Item Details</h2>
-	${ item.title }
+	<h3>${ item.title }</h3>
+	<h3>${ item }</h3>
 </body>
 </html>

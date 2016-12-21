@@ -49,6 +49,8 @@ public class AppController {
     @RequestMapping(value = {"/item-{id}"}, method = RequestMethod.GET)
     public String itemDetails(@PathVariable String id, ModelMap model) {
         Item item = itemService.findById(Integer.valueOf(id));
+        System.out.println(id);
+        System.out.println("item info: " + item);
         model.addAttribute("item", item);
         return "item";
     }

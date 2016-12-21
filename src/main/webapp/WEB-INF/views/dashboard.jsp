@@ -24,8 +24,6 @@
 			<c:choose>
 				<c:when test="${item.state == 'NEW'}">
 					<tr>
-						<a href="<c:url value='/new' />">Add New Employee</a>
-					
 						<td><a href="<c:url value='/item-${item.id}' /> ">
 							<div>
 								<p>ID: "${item.id}"</p>

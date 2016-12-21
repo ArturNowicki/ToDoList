@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 
     @SuppressWarnings("unchecked")
     public T getByKey(PK key) {
-        return (T) getSession().load(persistentClass, key);
+        T load = (T) getSession().load(persistentClass, key);
+        Hibernate.initialize(load);
+        return load;
     }
 
     public void persist(T entity) {
