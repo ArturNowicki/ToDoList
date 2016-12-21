@@ -4,6 +4,7 @@ drop table if exists Item;
 drop table if exists Tag;
 drop table if exists User;
 drop table if exists ItemTags;
+
 CREATE TABLE User(
     id INT(10) NOT NULL auto_increment, 
     login VARCHAR(50) NOT NULL,
