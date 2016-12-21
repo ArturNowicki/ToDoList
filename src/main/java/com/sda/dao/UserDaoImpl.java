@@ -13,36 +13,33 @@ import com.sda.model.User;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
 	@Override
-	public Optional<User> findById(int id) {
+	public User findById(int id) {
 		return getByKey(id);
 	}
 
 	@Override
-	public void saveUser(User user) {
+	public void add(User user) {
 		persist(user);
 	}
 
 	@Override
-	public boolean deleteUserById(int id) {
-		Optional<User> maybeUser = getByKey(id);
-		if(maybeUser.isPresent()) {
-			delete(maybeUser.get());
-			return true;
-		}
-		return false;
+	public void deleteById(int id) {
+		User user = getByKey(id);
+		delete(user);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findAllUsers() {
+	public List<User> listAll() {
 		Criteria criteria = createEntityCriteria();
 		return (List<User>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public User findByLogin(String login) {
+	public Optional<User> findByLogin(String login) {
 		Criteria criteria = createEntityCriteria();
 		criteria.add(Restrictions.eq("login", login));
-		return (User) criteria.uniqueResult();
+		return (Optional<User>) criteria.uniqueResult();
 	}
 }

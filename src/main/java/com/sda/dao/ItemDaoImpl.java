@@ -1,62 +1,37 @@
 package com.sda.dao;
 
-import com.sda.model.Item;
-import com.sda.model.User;
+import java.util.List;
+
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import com.sda.model.Item;
 
 @Repository("itemDao")
 public class ItemDaoImpl extends AbstractDao<Integer, Item> implements ItemDao {
 
-    @Override
-    public void addItem(Item item) {
-        persist(item);
-    }
+	@Override
+	public Item findById(int id) {
+		return getByKey(id);
+	}
 
-    @Override
-    public boolean deleteItemById(int id) {
-        Optional<Item> maybeItem = getByKey(id);
-        if (maybeItem.isPresent()) {
-            delete(maybeItem.get());
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public void add(Item item) {
+		persist(item);
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Item> listItems() {
-        Criteria criteria = createEntityCriteria();
-        return (List<Item>) criteria.list();
-    }
+	@Override
+	public void deleteById(int id) {
+		Item item = getByKey(id);
+		delete(item);
+	}
 
-    @Override
-    public boolean editItem(Item item) {
-        // TODO
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Item> listAll() {
+		Criteria criteria = createEntityCriteria();
+		return (List<Item>) criteria.list();
+	}
 
-        // edit title
 
-        // edit body
-
-        // edit state
-
-        // edit tags
-
-        // modfified
-
-        // edit remaining time
-
-        // edit completed time
-
-        return false;
-    }
-
-    @Override
-    public void changeState() {
-        //TODO
-    }
 }

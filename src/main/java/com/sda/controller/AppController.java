@@ -26,14 +26,14 @@ public class AppController {
 
     @RequestMapping(value = {"/userslist"}, method = RequestMethod.GET)
     public String listUsers(ModelMap model) {
-        List<User> users = userService.findAllUsers();
+        List<User> users = userService.listAll();
         model.addAttribute("user", users);
         return "allusers";
     }
 
     @RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
     public String listDashboard(ModelMap model) {
-        List<Item> items = itemService.listItems();
+        List<Item> items = itemService.listAll();
         model.addAttribute("item", items);
         return "dashboard";
     }

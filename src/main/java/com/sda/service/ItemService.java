@@ -1,20 +1,18 @@
 package com.sda.service;
 
-import com.sda.model.Item;
-import com.sda.model.User;
-
 import java.util.List;
+
+import com.sda.model.Item;
 
 public interface ItemService {
 
-    boolean editItem(Item item);
+	Item findById(int id);
 
-    boolean deleteItemById(int id);
+	void save(Item item);
 
-    void saveItem(Item item);
+	void deleteById(int id);
 
-    List<Item> listItems();
+	List<Item> listAll();
 
-    void changeState();
-
+	void update(Item item);
 }

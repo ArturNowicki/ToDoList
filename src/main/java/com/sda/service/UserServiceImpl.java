@@ -18,39 +18,34 @@ public class UserServiceImpl implements UserService {
 	UserDao dao;
 
 	@Override
-	public Optional<User> findById(int id) {
+	public User findById(int id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public User findByLogin(String login) {
+	public Optional<User> findByLogin(String login) {
 		return dao.findByLogin(login);
 	}
 
 	@Override
-	public void saveUser(User user) {
-		dao.saveUser(user);
+	public void save(User user) {
+		dao.add(user);
 	}
 
 	@Override
-	public boolean deleteUserById(int id) {
-		return dao.deleteUserById(id);
+	public void deleteById(int id) {
+		dao.deleteById(id);
 	}
 
 	@Override
-	public List<User> findAllUsers() {
-		return dao.findAllUsers();
+	public List<User> listAll() {
+		return dao.listAll();
 	}
 
 	@Override
-	public boolean updateUser(User user) {
-		Optional<User> maybeUser = dao.findById(user.getId());
-		if(maybeUser.isPresent()) {
-			User updatedUser = maybeUser.get();
-			updatedUser.setLogin(user.getLogin());
-			return true;
-		}
-		return false;
+	public void update(User user) {
+		User updatedUser = dao.findById(user.getId());
+		updatedUser.setLogin(user.getLogin());
 	}
 
 }

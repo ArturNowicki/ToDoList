@@ -6,13 +6,14 @@ import java.util.Optional;
 import com.sda.model.User;
 
 public interface UserDao {
-    Optional<User> findById(int id);
-    
-    User findByLogin(String login);
 
-    void saveUser(User user);
+	User findById(int id);
 
-    boolean deleteUserById(int id);
+	Optional<User> findByLogin(String login);
 
-    List<User> findAllUsers();
+	void add(User user);
+
+	void deleteById(int id);
+
+	List<User> listAll();
 }

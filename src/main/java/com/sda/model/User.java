@@ -25,7 +25,7 @@ public class User {
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
 	private List<Item> itemsList = new ArrayList<Item>();
 	public User() {
 	}

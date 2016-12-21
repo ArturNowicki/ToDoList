@@ -1,8 +1,6 @@
 package com.sda.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
@@ -48,10 +46,11 @@ public class Item {
     @Column(name = "severity", nullable = false, length = 1)
     private int severity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "itemTags")
-    private List<Tag> tags = new ArrayList<Tag>();
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "itemTags")
+//    private List<Tag> tags = new ArrayList<Tag>();
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
     private User assignedUser;
 
     @Column(name = "state", nullable = false)
@@ -120,13 +119,13 @@ public class Item {
         this.severity = severity;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
+//    public List<Tag> getTags() {
+//        return tags;
+//    }
+//
+//    public void setTags(List<Tag> tags) {
+//        this.tags = tags;
+//    }
 
     public User getAssignedTo() {
         return assignedUser;
@@ -187,7 +186,9 @@ public class Item {
     @Override
     public String toString() {
         return "Item [id=" + id + ", title=" + title + ", body=" + body + ", type=" + type + ", priority=" + priority
-                + ", severity=" + severity + ", tags=" + tags + ", assignedTo=" + assignedUser + ", state=" + state
+                + ", severity=" + severity
+//              + ", tags=" + tags 
+                + ", assignedTo=" + assignedUser + ", state=" + state
                 + ", created=" + created + ", modified=" + modified + ", originalEstimate=" + originalEstimate
                 + ", remainingHours=" + remainingHours + ", completedHours=" + completedHours + "]";
     }

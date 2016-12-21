@@ -1,18 +1,20 @@
 package com.sda.dao;
 
-import com.sda.model.Item;
-
 import java.util.List;
+
+import com.sda.model.Item;
 
 public interface ItemDao {
 
-    boolean deleteItemById(int id);
+	Item findById(int id);
 
-    void addItem(Item item);
+	void add(Item item);
 
-    List<Item> listItems();
+	void deleteById(int id);
 
-    boolean editItem(Item item);
+	List<Item> listAll();
 
-    void changeState();
+	// List<Item> findByName(String name);
+	//
+	// List<Item> findByUser(User user);
 }
