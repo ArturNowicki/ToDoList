@@ -23,6 +23,7 @@
 	Original estimate: "${item.originalEstimate}"<br/>
 	Completed hours: "${item.completedHours}"<br/>
 	Remaining hours: "${item.remainingHours}"<br/>
-	
+	<br/>
+	<a href="<c:url value='/' />">Back</a>
 </body>
 </html>

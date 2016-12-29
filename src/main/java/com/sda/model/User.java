@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = { "login" }) })
@@ -22,9 +25,11 @@ public class User {
 	@Column(name = "id", nullable = false, unique = true, length = 11)
 	private int id;
 
+	@Size(min=3, max=50)
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
 	
+	@Email
 	@Column(name = "email", length = 50)
 	private String email;
 

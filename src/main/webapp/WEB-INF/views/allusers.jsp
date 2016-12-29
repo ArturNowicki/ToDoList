@@ -21,6 +21,7 @@
 				<td>${user.id}</td>
 				<td>${user.login}</td>
 				<td>${user.email}</td>
+				<td><a href="<c:url value='/edit-{$user.id}-user'/>">Edit</a></td>
 			</tr>
 		</c:forEach>
 	</table>

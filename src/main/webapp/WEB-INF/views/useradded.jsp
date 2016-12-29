@@ -8,7 +8,8 @@
 <title>User Registration Confirmation</title>
 </head>
 <body>
-	message : ${success}
+	<br/>
+	<h3>${success}</h3>
 	<br/>
 	<br/>
 	<a href="<c:url value='/userslist' />">Back</a>
