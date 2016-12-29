@@ -18,4 +18,7 @@ public interface UserService {
     List<User> listAll();
     
     void update(User user);
+    
+	boolean isUserUnique(String login);
+
 }

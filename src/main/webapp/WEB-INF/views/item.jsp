@@ -8,8 +8,21 @@
 <title>Item Details</title>
 </head>
 <body>
+	<%@include file="../jspf/menu.jspf" %>
 	<h2>Item Details</h2>
-	<h3>${ item.title }</h3>
-	<h3>${ item }</h3>
+	ID: "${item.id}"<br/>
+	Title: "${item.title}"<br/>
+	Type: "${item.type}"<br/>
+	Priority: "${item.priority}"<br/>
+	Severity: "${item.severity}"
+	Owner: "${item.assignedUser.login}"<br/>
+	Message: "${item.body}"<br/>
+	State: "${item.state}"<br/>
+	Created: "${item.created}"<br/>
+	Modified: "${item.modified}"<br/>
+	Original estimate: "${item.originalEstimate}"<br/>
+	Completed hours: "${item.completedHours}"<br/>
+	Remaining hours: "${item.remainingHours}"<br/>
+	
 </body>
 </html>

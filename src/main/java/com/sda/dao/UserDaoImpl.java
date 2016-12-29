@@ -35,11 +35,10 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 		return (List<User>) criteria.list();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Optional<User> findByLogin(String login) {
 		Criteria criteria = createEntityCriteria();
 		criteria.add(Restrictions.eq("login", login));
-		return (Optional<User>) criteria.uniqueResult();
+		return Optional.ofNullable((User) criteria.uniqueResult());
 	}
 }

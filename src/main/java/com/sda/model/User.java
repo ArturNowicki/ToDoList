@@ -24,6 +24,21 @@ public class User {
 
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
+	
+	@Column(name = "email", length = 50)
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setItemsList(List<Item> itemsList) {
+		this.itemsList = itemsList;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
 	private List<Item> itemsList = new ArrayList<Item>();
@@ -81,6 +96,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", login=" + login + "]";
+		return "User [id=" + id + ", login=" + login + ", email=" + email + "]";
 	}
+
 }

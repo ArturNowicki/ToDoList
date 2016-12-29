@@ -8,13 +8,15 @@
 <title>Dashboard</title>
 </head>
 <body>
+	<%@include file="../jspf/menu.jspf" %>
 	<h2>Dashboard</h2>
-	<table cellspacing="2" cellpadding="3" border="1" align="center" style="width: 60%">
- 		<col width="25%">
- 		<col width="25%">
- 		<col width="25%">
- 		<col width="25%">
- 		<tr>
+	<table cellspacing="2" cellpadding="3" border="1" align="center"
+		style="width: 60%">
+		<col width="25%">
+		<col width="25%">
+		<col width="25%">
+		<col width="25%">
+		<tr>
 			<td>NEW</td>
 			<td>ACTIVE</td>
 			<td>RESOLVED</td>
@@ -24,15 +26,7 @@
 			<c:choose>
 				<c:when test="${item.state == 'NEW'}">
 					<tr>
-						<td><a href="<c:url value='/item-${item.id}' /> ">
-							<div>
-								<p>ID: "${item.id}"</p>
-								<p>Title: "${item.title}"</p>
-								<p>Login: "${item.assignedUser.login}"</p>
-								<p>Type: "${item.type}</p>
-							</div>
-							</a>
-						</td>
+						<td><%@include file="../jspf/tasktab.jspf" %></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -41,14 +35,7 @@
 				<c:when test="${item.state == 'ACTIVE'}">
 					<tr>
 						<td></td>
-						<td>
-							<div>
-								<p>ID: "${item.id}"</p>
-								<p>Title: "${item.title}"</p>
-								<p>Login: "${item.assignedUser.login}"</p>
-								<p>Type: "${item.type}</p>
-							</div>
-						</td>
+						<td><%@include file="../jspf/tasktab.jspf" %></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -57,14 +44,7 @@
 					<tr>
 						<td></td>
 						<td></td>
-						<td>
-							<div>
-								<p>ID: "${item.id}"</p>
-								<p>Title: "${item.title}"</p>
-								<p>Login: "${item.assignedUser.login}"</p>
-								<p>Type: "${item.type}</p>
-							</div>
-						</td>
+						<td><%@include file="../jspf/tasktab.jspf" %></td>
 						<td></td>
 					</tr>
 				</c:when>
@@ -73,14 +53,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td>
-							<div>
-								<p>ID: "${item.id}"</p>
-								<p>Title: "${item.title}"</p>
-								<p>Login: "${item.assignedUser.login}"</p>
-								<p>Type: "${item.type}</p>
-							</div>
-						</td>
+						<td><%@include file="../jspf/tasktab.jspf" %></td>
 					</tr>
 				</c:when>
 			</c:choose>

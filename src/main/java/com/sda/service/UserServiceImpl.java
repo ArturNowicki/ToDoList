@@ -44,8 +44,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(User user) {
-		User updatedUser = dao.findById(user.getId());
-		updatedUser.setLogin(user.getLogin());
+		User entity = dao.findById(user.getId());
+		if(null != entity) {
+			entity.setLogin(user.getLogin());
+			entity.setEmail(user.getEmail());
+		}
+	}
+
+	@Override
+	public boolean isUserUnique(String login) {
+		Optional<User> maybeUser = dao.findByLogin(login);
+		if(maybeUser.isPresent()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

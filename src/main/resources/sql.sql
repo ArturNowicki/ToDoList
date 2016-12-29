@@ -8,6 +8,7 @@ drop table if exists User;
 CREATE TABLE User(
     id INT(11) NOT NULL auto_increment, 
     login VARCHAR(50) NOT NULL,
+    email VARCHAR(50),
     PRIMARY KEY (id),
     UNIQUE KEY (login)
 );
@@ -49,7 +50,8 @@ CREATE TABLE ItemTags(
     CONSTRAINT FOREIGN KEY (idTag) REFERENCES Tag (id),
     CONSTRAINT FOREIGN KEY (idItem) REFERENCES Item (id)
     );
-INSERT INTO User (login) values ('Artur'), ('Daniel');
+INSERT INTO User (login, email) values ('Artur', 'anowicki@sda.pl');
+INSERT INTO User (login) values ('Daniel');
 select * from user;
 
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');
