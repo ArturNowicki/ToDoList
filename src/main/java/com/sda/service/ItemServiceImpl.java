@@ -1,5 +1,7 @@
 package com.sda.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,8 @@ import com.sda.model.Item;
 @Transactional
 public class ItemServiceImpl implements ItemService {
 
-    @Autowired
-    ItemDao dao;
+	@Autowired
+	ItemDao dao;
 
 	@Override
 	public Item findById(int id) {
@@ -38,9 +40,18 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public void update(Item item) {
-		Item updatedItem = dao.findById(item.getId());
-//		updatedItem = new Item(item);
+		Item entity = dao.findById(item.getId());
+		if(null != entity) {
+			entity.setAssignedUser(item.getAssignedUser());
+			entity.setBody(item.getBody());
+			entity.setCompletedHours(item.getCompletedHours());
+			entity.setModified(Date.valueOf(LocalDate.now()));
+			entity.setPriority(item.getPriority());
+			entity.setRemainingHours(item.getRemainingHours());
+			entity.setSeverity(item.getSeverity());
+//			entity.setState(item.getState());
+			entity.setTags(item.getTags());
+		}
 	}
-
 
 }

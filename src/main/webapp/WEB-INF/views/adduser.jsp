@@ -35,16 +35,10 @@
 				<td><form:input path="email" id="email" /></td>
 				<td><form:errors path="email" cssClass="error" /></td>
 			</tr>
-			
+
 			<tr>
-				<td colspan="3"><c:choose>
-						<c:when test="${edit}">
-							<input type="submit" value="Update" />
-						</c:when>
-						<c:otherwise>
-							<input type="submit" value="Add" />
-						</c:otherwise>
-					</c:choose></td>
+				<td colspan="3">
+						<input type="submit" value="Save" /></td>
 			</tr>
 		</table>
 	</form:form>
