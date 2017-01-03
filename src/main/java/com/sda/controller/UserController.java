@@ -15,6 +15,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sda.model.User;
 import com.sda.service.UserService;
@@ -43,7 +44,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
+	public String saveUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "adduser";
 		}
@@ -54,9 +55,7 @@ public class UserController {
 			return "adduser";
 		}
 		userService.save(user);
-		model.addAttribute("success", "User " + user.getLogin() + " added successfully");
-//		return "usersuccess";
-// 		TODO previous version showed success page. now i want to replace it with popup
+		redirectAttributes.addFlashAttribute("message", "User " + user.getLogin() + " added successfully");
 		return "redirect:/userslist";
 	}
 
@@ -68,7 +67,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/edit-{id}-user" }, method = RequestMethod.POST)
-	public String updateUser(@PathVariable String id, @Valid User user, BindingResult result, ModelMap model) {
+	public String updateUser(@PathVariable String id, @Valid User user, BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "adduser";
 		}
@@ -80,18 +80,16 @@ public class UserController {
 			return "adduser";
 		}
 		userService.update(user);
-		model.addAttribute("success", "User " + user.getLogin() + " updated successfully");
-//		return "usersuccess";
-// 		TODO previous version showed success page. now i want to replace it with popup
+		redirectAttributes.addFlashAttribute("message", "User " + user.getLogin() + " updated successfully");
 		return "redirect:/userslist";
 	}
 
 	@RequestMapping(value = { "/delete-{id}-user" }, method = RequestMethod.GET)
-	public String deleteUser(@PathVariable String id) {
+	public String deleteUser(@PathVariable String id, RedirectAttributes redirectAttributes) {
 		try {
 			userService.deleteById(Integer.valueOf(id));
-		} catch ( DataIntegrityViolationException e) {
-//			TODO implement some warning about constraints!
+		} catch (DataIntegrityViolationException e) {
+			redirectAttributes.addFlashAttribute("error", "Could not delete user!");
 		}
 		return "redirect:/userslist";
 	}

@@ -9,6 +9,8 @@
 	<title>List Users</title>
 </head>
 <body>
+	<h4>${message}</h4>
+	<h4>${error}</h4>
 	<%@include file="../jspf/menu.jspf"%>
 	<h2>List of Users</h2>
 	<table>
