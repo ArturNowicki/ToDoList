@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sda.dao.ItemDao;
 import com.sda.model.Item;
-import com.sda.model.User;
 
 @Service("itemService")
 @Transactional
@@ -48,16 +47,20 @@ public class ItemServiceImpl implements ItemService {
 		System.out.println("aaa: " + item);
 		System.out.println("bbb: " + entity);
 		if (null != entity) {
-			User user = userService.findById(item.getAssignedUser().getId());
-			entity.setAssignedUser(user);
+			entity.setAssignedUser(item.getAssignedUser());
 			entity.setBody(item.getBody());
 			entity.setCompletedHours(item.getCompletedHours());
+			entity.setCreated(item.getCreated());
 			entity.setModified(Date.valueOf(LocalDate.now()));
+			entity.setOriginalEstimate(item.getOriginalEstimate());
 			entity.setPriority(item.getPriority());
 			entity.setRemainingHours(item.getRemainingHours());
 			entity.setSeverity(item.getSeverity());
 			entity.setState(item.getState());
-			entity.setTags(item.getTags());
+//			entity.setTags(item.getTags());
+			entity.setTitle(item.getTitle());
+			entity.setType(item.getType());
+			entity.setSeverity(item.getSeverity());
 		}
 	}
 

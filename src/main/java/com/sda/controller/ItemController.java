@@ -1,5 +1,7 @@
 package com.sda.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sda.enums.ItemType;
-import com.sda.enums.State;
 import com.sda.model.Item;
+import com.sda.model.User;
 import com.sda.service.ItemService;
 import com.sda.service.UserService;
 
@@ -42,22 +43,23 @@ public class ItemController {
 		Item item = itemService.findById(Integer.valueOf(id));
 		System.out.println("item: " + item);
 		model.addAttribute("item", item);
-		model.addAttribute("user", item.getAssignedUser());
-//		model.addAttribute("types", ItemType.values());
-//		model.addAttribute("states", State.values());
-//		model.addAttribute("users", userService.listAll());
+		model.addAttribute("users", userService.listAll());
 		return "additem";
 	}
 
 	@RequestMapping(value = { "/edit-{id}-item" }, method = RequestMethod.POST)
 	public String updateItem(@PathVariable String id, @Valid Item item, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, ModelMap model) {
 		if (result.hasErrors()) {
+			model.addAttribute("users", userService.listAll());
 			return "additem";
 		}
+		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
+		item.setAssignedUser(user.get());
+		System.out.println("controller item: " + item);
 		itemService.update(item);
 		redirectAttributes.addFlashAttribute("message", "Item " + item.getId() + ": " + item.getTitle() + " updated successfully");
-		return "redirect:/dashboard";
+		return "redirect:/item-{id}";
 	}
 
 }

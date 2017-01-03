@@ -23,10 +23,6 @@
 		<form:input type="hidden" path="id" id="id" />
 		<form:input type="hidden" path="created" id="created" />
 		<form:input type="hidden" path="originalEstimate" id="originalEstimate" />
-		<form:input type="hidden" path="type" id="type" />
-		<form:input type="hidden" path="state" id="state" />
-		<form:input type="hidden" path="assignedUser" id="userId"/>
-		${user}
 		<table>
 			<tr>
 				<td><label for="title">Title: </label></td>
@@ -34,6 +30,13 @@
 				<td><form:errors path="title" cssClass="error" /></td>
 			</tr>
 
+			<tr>
+				<td><label for="type">Type: </label></td>
+				<td><form:select path="type" id="type">
+					<form:options items="${types}"/>
+				</form:select></td>
+				<td><form:errors path="type" cssClass="error" /></td>
+			</tr>
 
 			<tr>
 				<td><label for="priority">Priority: </label></td>
@@ -48,12 +51,27 @@
 			</tr>
 			
 			<tr>
+				<td><label for="assignedUser">Owner: </label></td>
+				<td><form:select path="assignedUser" id="assignedUser">
+					<form:options items="${users}" itemValue="login" itemLabel="login"/>
+				</form:select></td>
+				<td><form:errors path="assignedUser" cssClass="error" /></td>
+			</tr>
+
+			<tr>
 				<td><label for="body">Message: </label></td>
 				<td><form:input path="body" id="body" /></td>
 				<td><form:errors path="body" cssClass="error" /></td>
 			</tr>
 			
-			
+			<tr>
+				<td><label for="state">State: </label></td>
+				<td><form:select path="state" id="state">
+					<form:options items="${types}"/>
+				</form:select></td>
+				<td><form:errors path="state" cssClass="error" /></td>
+			</tr>
+
 			<tr>
 				<td><label for="completedHours">Completed hours: </label></td>
 				<td><form:input path="completedHours" id="completedHours" /></td>

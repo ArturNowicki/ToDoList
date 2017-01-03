@@ -39,7 +39,7 @@ public class Item {
 	@Column(name = "body", length = 50)
 	private String body;
 
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(name = "itemType", nullable = false)
 	private ItemType type;
 
@@ -62,7 +62,7 @@ public class Item {
 	@JoinColumn(name = "userId")
 	private User assignedUser;
 
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(name = "state", nullable = false)
 	private State state;
 
