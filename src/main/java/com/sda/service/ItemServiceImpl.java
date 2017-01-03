@@ -10,10 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sda.dao.ItemDao;
 import com.sda.model.Item;
+import com.sda.model.User;
 
 @Service("itemService")
 @Transactional
 public class ItemServiceImpl implements ItemService {
+
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	ItemDao dao;
@@ -41,15 +45,18 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void update(Item item) {
 		Item entity = dao.findById(item.getId());
-		if(null != entity) {
-			entity.setAssignedUser(item.getAssignedUser());
+		System.out.println("aaa: " + item);
+		System.out.println("bbb: " + entity);
+		if (null != entity) {
+			User user = userService.findById(item.getAssignedUser().getId());
+			entity.setAssignedUser(user);
 			entity.setBody(item.getBody());
 			entity.setCompletedHours(item.getCompletedHours());
 			entity.setModified(Date.valueOf(LocalDate.now()));
 			entity.setPriority(item.getPriority());
 			entity.setRemainingHours(item.getRemainingHours());
 			entity.setSeverity(item.getSeverity());
-//			entity.setState(item.getState());
+			entity.setState(item.getState());
 			entity.setTags(item.getTags());
 		}
 	}

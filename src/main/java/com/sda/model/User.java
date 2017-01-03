@@ -3,6 +3,7 @@ package com.sda.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class User {
 		this.itemsList = itemsList;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser", cascade = {CascadeType.ALL})
 	private List<Item> itemsList = new ArrayList<Item>();
 	public User() {
 	}

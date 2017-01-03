@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Registration Form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>User Form</title>
 
 <style>
 .error {
@@ -18,8 +17,9 @@
 </head>
 
 <body>
+	<%@include file="../jspf/menu.jspf" %>
 
-	<h2>User Registration</h2>
+	<h2>User Form</h2>
 
 	<form:form method="POST" modelAttribute="user">
 		<form:input type="hidden" path="id" id="id" />
@@ -37,12 +37,10 @@
 			</tr>
 
 			<tr>
-				<td colspan="3">
-						<input type="submit" value="Save" /></td>
+				<td colspan="1"><input type="submit" value="Save" /></td>
+				<td colspan="1"><a href="userslist"><input type="button" value="Cancel"/></a></td>
 			</tr>
 		</table>
 	</form:form>
-	<br />
-	<a href="<c:url value='userslist' />">Back</a>
 </body>
 </html>

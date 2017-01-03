@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +39,7 @@ public class Item {
 	@Column(name = "body", length = 50)
 	private String body;
 
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "itemType", nullable = false)
 	private ItemType type;
 
@@ -59,14 +62,7 @@ public class Item {
 	@JoinColumn(name = "userId")
 	private User assignedUser;
 
-	public Set<Tag> getTags() {
-		return tags;
-	}
-
-	public void setTags(Set<Tag> tags) {
-		this.tags = tags;
-	}
-
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	private State state;
 
@@ -139,6 +135,14 @@ public class Item {
 
 	public void setAssignedUser(User assignedUser) {
 		this.assignedUser = assignedUser;
+	}
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
 	}
 
 	public State getState() {
