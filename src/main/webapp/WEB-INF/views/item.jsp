@@ -27,7 +27,7 @@
 	<br />
 	<form action='edit-${item.id}-item' method="get">
 		<input type="submit" value="Edit" />
-		<td colspan="1"><a href="dashboard"><input type="button" value="Back"/></a></td>
+		<a href="dashboard"><input type="button" value="Back"/></a>
 	</form>
 </body>
 </html>
