@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sda.model.Item;
 import com.sda.model.User;
 import com.sda.service.ItemService;
+import com.sda.service.TagsService;
 import com.sda.service.UserService;
 
 @Controller
@@ -30,6 +31,9 @@ public class ItemController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	TagsService tagsService;
 
 	@RequestMapping(value = { "/item-{id}" }, method = RequestMethod.GET)
 	public String itemDetails(@PathVariable String id, ModelMap model) {
@@ -52,11 +56,11 @@ public class ItemController {
 			RedirectAttributes redirectAttributes, ModelMap model) {
 		if (result.hasErrors()) {
 			model.addAttribute("users", userService.listAll());
+			model.addAttribute("tags", tagsService.listAll());
 			return "additem";
 		}
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
 		item.setAssignedUser(user.get());
-		System.out.println("controller item: " + item);
 		itemService.update(item);
 		redirectAttributes.addFlashAttribute("message", "Item " + item.getId() + ": " + item.getTitle() + " updated successfully");
 		return "redirect:/item-{id}";

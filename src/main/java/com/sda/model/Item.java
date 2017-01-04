@@ -53,8 +53,8 @@ public class Item {
 	@Column(name = "severity", nullable = false, length = 1)
 	private int severity;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "mixtable", joinColumns = {
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "ItemTags", joinColumns = {
 			@JoinColumn(name = "idItem", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "idTag", nullable = false) })
 	private Set<Tag> tags = new HashSet<Tag>();
 
@@ -197,7 +197,7 @@ public class Item {
 	public String toString() {
 		return "Item [id=" + id + ", title=" + title + ", body=" + body + ", type=" + type + ", priority=" + priority
 				+ ", severity=" + severity
-				// + ", tags=" + tags
+				+ ", tags=" + tags
 				+ ", assignedTo=" + assignedUser + ", state=" + state + ", created=" + created + ", modified="
 				+ modified + ", originalEstimate=" + originalEstimate + ", remainingHours=" + remainingHours
 				+ ", completedHours=" + completedHours + "]";

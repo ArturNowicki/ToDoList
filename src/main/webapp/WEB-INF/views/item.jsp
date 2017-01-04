@@ -23,6 +23,9 @@
 	<br /> Original estimate: "${item.originalEstimate}"
 	<br /> Completed hours: "${item.completedHours}"
 	<br /> Remaining hours: "${item.remainingHours}"
+<!--<br /> Tags: <c:forEach items="${item.tags}" var="tag">
+				<input type="button" value="${tag.name}" disabled/> 
+				</c:forEach>  -->	
 	<br />
 	<br />
 	<form action='edit-${item.id}-item' method="get">

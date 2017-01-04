@@ -25,13 +25,18 @@
 		<form:input type="hidden" path="originalEstimate" id="originalEstimate" />
 		<table>
 			<tr>
+				<td><label>Id: </label></td>
+				<td>${item.id}</td>
+			</tr>
+
+			<tr>
 				<td><label for="title">Title: </label></td>
 				<td><form:input path="title" id="title" /></td>
 				<td><form:errors path="title" cssClass="error" /></td>
 			</tr>
 
 			<tr>
-				<td><label for="type">Type: </label></td>
+				<td><label>Type: </label></td>
 				<td><form:select path="type" id="type">
 					<form:options items="${types}"/>
 				</form:select></td>
@@ -39,11 +44,17 @@
 			</tr>
 
 			<tr>
-				<td><label for="priority">Priority: </label></td>
-				<td><form:input path="priority" id="priority" /></td>
-				<td><form:errors path="priority" cssClass="error" /></td>
+				<td><label>Priority: </label></td>
+				<td><form:select path="priority" id="priority" >
+				<form:option value="1">1</form:option>
+				<form:option value="2">2</form:option>
+				<form:option value="3">3</form:option>
+				<form:option value="4">4</form:option>
+				<form:option value="5">5</form:option>
+				</form:select></td>
 			</tr>
 
+<!-- this can be done with dropdown list just like the above but i wanted to check how does error work -->
 			<tr>
 				<td><label for="severity">Severity: </label></td>
 				<td><form:input path="severity" id="severity" /></td>
@@ -51,7 +62,7 @@
 			</tr>
 			
 			<tr>
-				<td><label for="assignedUser">Owner: </label></td>
+				<td><label>Owner: </label></td>
 				<td><form:select path="assignedUser" id="assignedUser">
 					<form:options items="${users}" itemValue="login" itemLabel="login"/>
 				</form:select></td>
@@ -60,16 +71,31 @@
 
 			<tr>
 				<td><label for="body">Message: </label></td>
-				<td><form:input path="body" id="body" /></td>
+				<td><form:textarea path="body" id="body" /></td>
 				<td><form:errors path="body" cssClass="error" /></td>
 			</tr>
 			
 			<tr>
-				<td><label for="state">State: </label></td>
+				<td><label>State: </label></td>
 				<td><form:select path="state" id="state">
-					<form:options items="${types}"/>
+					<form:options/>
 				</form:select></td>
 				<td><form:errors path="state" cssClass="error" /></td>
+			</tr>
+
+			<tr>
+				<td><label>Created: </label></td>
+				<td>${item.created}</td>
+			</tr>
+
+			<tr>
+				<td><label>Modified: </label></td>
+				<td>${item.modified}</td>
+			</tr>
+
+			<tr>
+				<td><label>Original estimate: </label></td>
+				<td>${item.originalEstimate}</td>
 			</tr>
 
 			<tr>
@@ -83,11 +109,15 @@
 				<td><form:input path="remainingHours" id="remainingHours" /></td>
 				<td><form:errors path="remainingHours" cssClass="error" /></td>
 			</tr>
+			
+			<tr>
+				<td><label>Tags: </label></td>
+				<td>${item.tags}</td>
+			</tr>
 
 			<tr>
 				<td colspan="1"><input type="submit" value="Save" /></td>
 				<td colspan="1"><a href="item-${id}"><input type="button" value="Cancel"/></a></td>
-				
 			</tr>
 		</table>
 	</form:form>

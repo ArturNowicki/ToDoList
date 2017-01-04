@@ -1,6 +1,7 @@
 package com.sda.dao;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
@@ -30,7 +31,9 @@ public class ItemDaoImpl extends AbstractDao<Integer, Item> implements ItemDao {
 	@Override
 	public List<Item> listAll() {
 		Criteria criteria = createEntityCriteria();
-		return (List<Item>) criteria.list();
+		List<Item> result = criteria.list();
+		return result.stream().distinct().collect(Collectors.toList());
+		
 	}
 
 

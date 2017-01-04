@@ -69,5 +69,5 @@ INSERT INTO Item(title, body, itemType, priority, severity, userId,
 SELECT i.id, i.title, i.body FROM Item i
 JOin ItemTags it on it.idItem = i.id ;
 
-INSERT INTO ItemTags (idTag, idItem) Values (1,1);
-Select * from item;
+INSERT INTO ItemTags (idTag, idItem) Values (1,1), (2, 1), (1,2), (3, 2);
+Select i.id, i.title from Item i join ItemTags it on (it.idItem=i.id);

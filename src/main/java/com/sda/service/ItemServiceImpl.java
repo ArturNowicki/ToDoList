@@ -44,8 +44,6 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void update(Item item) {
 		Item entity = dao.findById(item.getId());
-		System.out.println("aaa: " + item);
-		System.out.println("bbb: " + entity);
 		if (null != entity) {
 			entity.setAssignedUser(item.getAssignedUser());
 			entity.setBody(item.getBody());
@@ -57,7 +55,7 @@ public class ItemServiceImpl implements ItemService {
 			entity.setRemainingHours(item.getRemainingHours());
 			entity.setSeverity(item.getSeverity());
 			entity.setState(item.getState());
-//			entity.setTags(item.getTags());
+			entity.setTags(item.getTags());
 			entity.setTitle(item.getTitle());
 			entity.setType(item.getType());
 			entity.setSeverity(item.getSeverity());
