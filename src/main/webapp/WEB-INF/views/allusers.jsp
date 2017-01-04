@@ -24,6 +24,7 @@
 				<td>${user.id}</td>
 				<td>${user.login}</td>
 				<td>${user.email}</td>
+				<td>${user.userType}</td>
 				<td><form action='edit-${user.id}-user' method="get">
 						<input type="submit" value="Edit" />
 					</form></td>

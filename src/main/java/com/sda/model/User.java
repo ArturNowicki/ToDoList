@@ -3,9 +3,10 @@ package com.sda.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.sda.enums.UserType;
+
 @Entity
 @Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = { "login" }) })
 public class User {
@@ -26,13 +29,17 @@ public class User {
 	@Column(name = "id", nullable = false, unique = true, length = 11)
 	private int id;
 
-	@Size(min=3, max=50)
+	@Size(min = 3, max = 50)
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
-	
+
 	@Email
 	@Column(name = "email", length = 50)
 	private String email;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type", length = 50)
+	private UserType userType;
 
 	public String getEmail() {
 		return email;
@@ -46,8 +53,9 @@ public class User {
 		this.itemsList = itemsList;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser", cascade = {CascadeType.ALL})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
 	private List<Item> itemsList = new ArrayList<Item>();
+
 	public User() {
 	}
 
@@ -73,6 +81,14 @@ public class User {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	@Override
@@ -102,7 +118,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", email=" + email + "]";
+		return "User [id=" + id + ", login=" + login + ", email=" + email + ", userType=" + userType + "]";
 	}
+
+
 
 }

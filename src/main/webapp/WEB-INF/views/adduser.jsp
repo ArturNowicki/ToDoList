@@ -37,6 +37,14 @@
 			</tr>
 
 			<tr>
+				<td><label>Type: </label></td>
+				<td><form:select path="userType" id="type">
+					<form:options/>
+				</form:select></td>
+				<td><form:errors path="userType" cssClass="error" /></td>
+			</tr>
+
+			<tr>
 				<td colspan="1"><input type="submit" value="Save" /></td>
 				<td colspan="1"><a href="userslist"><input type="button" value="Cancel"/></a></td>
 			</tr>

@@ -9,6 +9,7 @@ CREATE TABLE User(
     id INT(11) NOT NULL auto_increment, 
     login VARCHAR(50) NOT NULL,
     email VARCHAR(50),
+    type enum('USER', 'ADMIN') NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (login)
 );
@@ -48,9 +49,9 @@ CREATE TABLE ItemTags(
     CONSTRAINT FOREIGN KEY (idTag) REFERENCES Tag (id),
     CONSTRAINT FOREIGN KEY (idItem) REFERENCES Item (id)
     );
-INSERT INTO User (login, email) values ('Artur', 'anowicki@sda.pl');
-INSERT INTO User (login) values ('Daniel');
-INSERT INTO User (login, email) values ('Tomasz', 'tomek@sda.pl');
+INSERT INTO User (login, email, type) values ('Artur', 'anowicki@sda.pl', 'ADMIN');
+INSERT INTO User (login, type) values ('Daniel', 'ADMIN');
+INSERT INTO User (login, email, type) values ('Tomasz', 'tomek@sda.pl', 'USER');
 select * from user;
 
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');
@@ -71,3 +72,5 @@ JOin ItemTags it on it.idItem = i.id ;
 
 INSERT INTO ItemTags (idTag, idItem) Values (1,1), (2, 1), (1,2), (3, 2);
 Select i.id, i.title from Item i join ItemTags it on (it.idItem=i.id);
+
+SELECT * FROM USER;
