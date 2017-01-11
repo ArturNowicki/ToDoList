@@ -8,6 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User Form</title>
 
+<script>
+	function check_pass() {
+		if (password.value == confirm_password.value) {
+			confirm_password.setCustomValidity("");
+			} else {
+			confirm_password.setCustomValidity("Passwords Don't Match");
+		}
+	}
+</script>
+
 <style>
 .error {
 	color: #ff0000;
@@ -31,6 +41,20 @@
 			</tr>
 
 			<tr>
+				<td><label for="password">Password: </label></td>
+				<td><form:password path="password" id="password"
+						onchange='check_pass();' /></td>
+				<td><form:errors path="password" cssClass="error" /></td>
+			</tr>
+
+			<tr>
+				<td><label for="confirm_password">Confirm Password: </label></td>
+				<td><form:password path="password" id="confirm_password"
+						onchange='check_pass();' /></td>
+				<td><form:errors path="password" cssClass="error" /></td>
+			</tr>
+
+			<tr>
 				<td><label for="email">E-Mail: </label></td>
 				<td><form:input path="email" id="email" /></td>
 				<td><form:errors path="email" cssClass="error" /></td>
@@ -45,7 +69,6 @@
 			</tr>
 
 			<tr>
-				<td colspan="1"><input type="submit" value="Save" /></td>
 				<td colspan="1"><a href="users"><input type="button"
 						value="Cancel" /></a></td>
 			</tr>
