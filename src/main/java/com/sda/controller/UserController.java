@@ -29,7 +29,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = { "/userslist" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/users" }, method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 		List<User> users = userService.listAll();
 		model.addAttribute("user", users);
@@ -56,7 +56,7 @@ public class UserController {
 		}
 		userService.save(user);
 		redirectAttributes.addFlashAttribute("message", "User " + user.getLogin() + " added successfully");
-		return "redirect:/userslist";
+		return "redirect:/users";
 	}
 
 	@RequestMapping(value = { "/edit-{id}-user" }, method = RequestMethod.GET)
@@ -81,7 +81,7 @@ public class UserController {
 		}
 		userService.update(user);
 		redirectAttributes.addFlashAttribute("message", "User " + user.getLogin() + " updated successfully");
-		return "redirect:/userslist";
+		return "redirect:/users";
 	}
 
 	@RequestMapping(value = { "/delete-{id}-user" }, method = RequestMethod.GET)
@@ -91,7 +91,7 @@ public class UserController {
 		} catch (DataIntegrityViolationException e) {
 			redirectAttributes.addFlashAttribute("error", "Could not delete user!");
 		}
-		return "redirect:/userslist";
+		return "redirect:/users";
 	}
 
 }

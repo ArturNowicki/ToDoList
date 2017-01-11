@@ -8,6 +8,7 @@ drop table if exists User;
 CREATE TABLE User(
     id INT(11) NOT NULL auto_increment, 
     login VARCHAR(50) NOT NULL,
+    pass VARCHAR(50) NOT NULL,
     email VARCHAR(50),
     type enum('USER', 'ADMIN') NOT NULL,
     PRIMARY KEY (id),
@@ -49,9 +50,9 @@ CREATE TABLE ItemTags(
     CONSTRAINT FOREIGN KEY (idTag) REFERENCES Tag (id),
     CONSTRAINT FOREIGN KEY (idItem) REFERENCES Item (id)
     );
-INSERT INTO User (login, email, type) values ('Artur', 'anowicki@sda.pl', 'ADMIN');
-INSERT INTO User (login, type) values ('Daniel', 'ADMIN');
-INSERT INTO User (login, email, type) values ('Tomasz', 'tomek@sda.pl', 'USER');
+INSERT INTO User (login, pass, email, type) values ('Artur', 'artur01', 'anowicki@sda.pl', 'ADMIN');
+INSERT INTO User (login, pass, type) values ('Daniel', 'daniel01', 'ADMIN');
+INSERT INTO User (login, pass, email, type) values ('Tomasz', 'tomasz01', 'tomek@sda.pl', 'USER');
 select * from user;
 
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');

@@ -26,4 +26,9 @@ public class AppController {
 		model.addAttribute("item", items);
 		return "dashboard";
 	}
+	
+	@RequestMapping(value = {"/login" }, method = RequestMethod.GET)
+	public String displayLoginPage(ModelMap model) {
+		return "login";
+	}
 }

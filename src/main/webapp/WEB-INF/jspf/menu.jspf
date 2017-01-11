@@ -6,7 +6,7 @@
 	<col width="50%">
 	<tr>
 		<td><a href="dashboard"><div>Dashboard</div></a></td>
-		<td><a href="userslist"><div>Users</div></a></td>
+		<td><a href="users"><div>Users</div></a></td>
 	</tr>
 </table>
 <br clear="all" />

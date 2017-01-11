@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -30,9 +31,15 @@ public class User {
 	private int id;
 
 	@Size(min = 3, max = 50)
+	@NotNull
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
 
+	@Size(min = 6, max = 50)
+	@NotNull
+	@Column(name = "pass", nullable = false, length = 50)
+	private String password;
+	
 	@Email
 	@Column(name = "email", length = 50)
 	private String email;
@@ -40,18 +47,6 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", length = 50)
 	private UserType userType;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setItemsList(List<Item> itemsList) {
-		this.itemsList = itemsList;
-	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
 	private List<Item> itemsList = new ArrayList<Item>();
@@ -81,6 +76,26 @@ public class User {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setItemsList(List<Item> itemsList) {
+		this.itemsList = itemsList;
 	}
 
 	public UserType getUserType() {

@@ -1,0 +1,3 @@
+String string = "sfasfsafd";
+
+System.out.println(string.matches("[a-zA-Z]+"));
