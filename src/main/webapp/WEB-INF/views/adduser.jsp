@@ -69,6 +69,7 @@
 			</tr>
 
 			<tr>
+				<td colspan="1"><input type="submit" value="Save"/></td>
 				<td colspan="1"><a href="users"><input type="button"
 						value="Cancel" /></a></td>
 			</tr>
