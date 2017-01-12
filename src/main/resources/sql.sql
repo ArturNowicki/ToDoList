@@ -10,7 +10,7 @@ CREATE TABLE User(
     login VARCHAR(50) NOT NULL,
     pass VARCHAR(50) NOT NULL,
     email VARCHAR(50),
-    type enum('USER', 'ADMIN') NOT NULL,
+    type VARCHAR(30) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (login)
 );
@@ -50,9 +50,9 @@ CREATE TABLE ItemTags(
     CONSTRAINT FOREIGN KEY (idTag) REFERENCES Tag (id),
     CONSTRAINT FOREIGN KEY (idItem) REFERENCES Item (id)
     );
-INSERT INTO User (login, pass, email, type) values ('Artur', 'artur01', 'anowicki@sda.pl', 'ADMIN');
-INSERT INTO User (login, pass, type) values ('Daniel', 'daniel01', 'ADMIN');
-INSERT INTO User (login, pass, email, type) values ('Tomasz', 'tomasz01', 'tomek@sda.pl', 'USER');
+INSERT INTO User (login, pass, email, type) values ('artur', 'artur01', 'anowicki@sda.pl', 'ADMIN');
+INSERT INTO User (login, pass, type) values ('daniel', 'daniel01', 'ADMIN');
+INSERT INTO User (login, pass, email, type) values ('tomasz', 'tomasz01', 'tomek@sda.pl', 'USER');
 select * from user;
 
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');

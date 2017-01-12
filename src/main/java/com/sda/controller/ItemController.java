@@ -35,23 +35,28 @@ public class ItemController {
 	@Autowired
 	TagsService tagsService;
 
-	@RequestMapping(value = { "/item-{id}" }, method = RequestMethod.GET)
+	@Autowired
+	PrincipalUtil util;
+	
+	@RequestMapping(value = "/item-{id}", method = RequestMethod.GET)
 	public String itemDetails(@PathVariable String id, ModelMap model) {
 		Item item = itemService.findById(Integer.valueOf(id));
 		model.addAttribute("item", item);
+		model.addAttribute("loggedUser", util.getPrincipal());
 		return "item";
 	}
 	
-	@RequestMapping(value = {"/edit-{id}-item"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.GET)
 	public String editItem(@PathVariable String id, ModelMap model) {
 		Item item = itemService.findById(Integer.valueOf(id));
 		System.out.println("item: " + item);
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
+		model.addAttribute("loggedUser", util.getPrincipal());
 		return "additem";
 	}
 
-	@RequestMapping(value = { "/edit-{id}-item" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.POST)
 	public String updateItem(@PathVariable String id, @Valid Item item, BindingResult result,
 			RedirectAttributes redirectAttributes, ModelMap model) {
 		if (result.hasErrors()) {

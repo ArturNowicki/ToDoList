@@ -38,7 +38,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 	@Override
 	public Optional<User> findByLogin(String login) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("login", login));
+		criteria.add(Restrictions.eq("login", login.toLowerCase()));
 		return Optional.ofNullable((User) criteria.uniqueResult());
 	}
 }

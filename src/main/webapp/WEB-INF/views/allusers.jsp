@@ -19,16 +19,16 @@
 			<td>NAME</td>
 			<td>CONTACT</td>
 		</tr>
-		<c:forEach items="${user}" var="user">
+		<c:forEach items="${users}" var="users">
 			<tr>
-				<td>${user.id}</td>
-				<td>${user.login}</td>
-				<td>${user.email}</td>
-				<td>${user.userType}</td>
-				<td><form action='edit-${user.id}-user' method="get">
+				<td>${users.id}</td>
+				<td>${users.login}</td>
+				<td>${users.email}</td>
+				<td>${users.userType}</td>
+				<td><form action='edit-${users.id}-user' method="get">
 						<input type="submit" value="Edit" />
 					</form></td>
-				<td><a href="delete-${user.id}-user" onclick="return confirm('Delete ${user.login}?')">
+				<td><a href="delete-${users.id}-user" onclick="return confirm('Delete ${users.login}?')">
 					<input type="submit" value="Delete" />
 				</a></td>
 			</tr>

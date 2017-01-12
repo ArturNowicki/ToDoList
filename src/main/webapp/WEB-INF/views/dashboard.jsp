@@ -8,6 +8,7 @@
 <title>Dashboard</title>
 </head>
 <body>
+
 	<%@include file="../jspf/menu.jspf" %>
 	<h2>Dashboard</h2>
 	<table cellspacing="2" cellpadding="3" border="1" align="center"

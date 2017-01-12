@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<div align="left">Logged in as: <strong>${loggedUser}</strong></div>
+<br/>
+<div align="left"><a href="<c:url value="/logout" />">Logout</a></div>
 <table cellspacing="2" cellpadding="3" border="1" align="center"
 	style="width: 60%">
 	<col width="50%">

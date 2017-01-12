@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,22 +29,30 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserDetailsService customUserDetailsService;
 
-	@RequestMapping(value = { "/users" }, method = RequestMethod.GET)
+	@Autowired
+	PrincipalUtil util;
+	
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 		List<User> users = userService.listAll();
-		model.addAttribute("user", users);
+		model.addAttribute("users", users);
+		model.addAttribute("loggedUser", util.getPrincipal());
 		return "allusers";
 	}
 
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 		User user = new User();
 		model.addAttribute("user", user);
+		model.addAttribute("loggedUser", util.getPrincipal());
 		return "adduser";
 	}
 
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "adduser";
@@ -59,14 +68,16 @@ public class UserController {
 		return "redirect:/users";
 	}
 
-	@RequestMapping(value = { "/edit-{id}-user" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.GET)
 	public String editUser(@PathVariable String id, ModelMap model) {
 		User user = userService.findById(Integer.valueOf(id));
+		customUserDetailsService.loadUserByUsername(user.getLogin());
 		model.addAttribute("user", user);
+		model.addAttribute("loggedUser", util.getPrincipal());
 		return "adduser";
 	}
 
-	@RequestMapping(value = { "/edit-{id}-user" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.POST)
 	public String updateUser(@PathVariable String id, @Valid User user, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
@@ -84,7 +95,7 @@ public class UserController {
 		return "redirect:/users";
 	}
 
-	@RequestMapping(value = { "/delete-{id}-user" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/delete-{id}-user", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable String id, RedirectAttributes redirectAttributes) {
 		try {
 			userService.deleteById(Integer.valueOf(id));

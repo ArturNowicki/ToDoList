@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
-import com.sda.enums.UserType;
+import com.sda.enums.UserProfileType;
 
 @Entity
 @Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = { "login" }) })
@@ -46,7 +46,7 @@ public class User {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", length = 50)
-	private UserType userType;
+	private UserProfileType userType;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
 	private List<Item> itemsList = new ArrayList<Item>();
@@ -55,7 +55,7 @@ public class User {
 	}
 
 	public User(String login) {
-		this.login = login;
+		this.login = login.toLowerCase();
 	}
 
 	public List<Item> getItemsList() {
@@ -75,7 +75,7 @@ public class User {
 	}
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.login = login.toLowerCase();
 	}
 
 	public String getPassword() {
@@ -91,18 +91,18 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 
 	public void setItemsList(List<Item> itemsList) {
 		this.itemsList = itemsList;
 	}
 
-	public UserType getUserType() {
+	public UserProfileType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(UserType userType) {
+	public void setUserType(UserProfileType userType) {
 		this.userType = userType;
 	}
 
