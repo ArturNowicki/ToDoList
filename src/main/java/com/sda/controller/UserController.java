@@ -94,6 +94,8 @@ public class UserController {
 		return "redirect:/users";
 	}
 
+//	TODO change password
+	
 	@RequestMapping(value = "/delete-{id}-user", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable String id, RedirectAttributes redirectAttributes) {
 		try {

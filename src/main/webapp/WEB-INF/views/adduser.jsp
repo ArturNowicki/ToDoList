@@ -9,14 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 <title>Add User</title>
-<script>
-	function check_pass() {
-		if (password.value == confirm_password.value) {
-			confirm_password.setCustomValidity("");
+<script type="text/javascript" src="/static/js/check_pass.js">
+/* 	function check_pass(pass, confirm_pass) {
+		if (pass.value == confirm_pass.value) {
+			confirm_pass.setCustomValidity("");
 		} else {
-			confirm_password.setCustomValidity("Passwords Don't Match");
+			confirm_pass.setCustomValidity("Passwords Don't Match");
 		}
-	}
+	} */
 </script>
 
 </head>
@@ -38,14 +38,14 @@
 				<tr>
 					<td><label for="password">Password: </label></td>
 					<td><form:password path="password" id="password" placeholder="Enter Password"
-							onchange='check_pass();' /></td>
+							onchange='check_pass(password, confirm_password);' /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="confirm_password">Confirm Password: </label></td>
 					<td><input type="password" id="confirm_password" placeholder="Confirm Password"
-							onchange='check_pass();' /></td>
+							onchange='check_pass(password, confirm_password)' /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 

@@ -27,13 +27,22 @@
 				<input type="button" value="${tag.name}" disabled/> 
 				</c:forEach>  -->
 		<br /> <br />
-		<form action='edit-${item.id}-item' method="get">
-			<input type="submit" value="Edit" />
-		</form>
-		<a href="dashboard"><input type="button" value="Back" /></a>
-		<a href='delete-${item.id}-item'
-			onclick="return confirm('Delete ${item.title}?')"><input
-			type="submit" value="Delete" /></a>
+		<div>
+			<div style="float: left">
+				<form action='edit-${item.id}-item' method="get">
+					<input type="submit" value="Edit" />
+				</form>
+			</div>
+			<div style="float: left">
+				<a href="dashboard"><input type="button" value="Back" /></a>
+			</div>
+			<div style="float: left">
+				<a href='delete-${item.id}-item'
+					onclick="return confirm('Delete ${item.title}?')"><input
+					type="submit" value="Delete" /></a>
+			</div>
+		</div>
+		<br style="clear:all;"/>
 	</div>
 </body>
 </html>

@@ -1,7 +1,7 @@
-function check_pass(password, confirm_password) {
-	if (password.value == confirm_password.value) {
-		confirm_password.setCustomValidity("");
+function check_pass(pass, confirm_pass) {
+	if (pass.value == confirm_pass.value) {
+		confirm_pass.setCustomValidity("");
 	} else {
-		confirm_password.setCustomValidity("Passwords Don't Match");
+		confirm_pass.setCustomValidity("Passwords Don't Match");
 	}
 }

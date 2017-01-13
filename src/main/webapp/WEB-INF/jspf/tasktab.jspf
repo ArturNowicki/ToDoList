@@ -1,8 +1,6 @@
 
 <a href="<c:url value='/item-${item.id}' /> ">
-	<div>
 	ID: "${item.id}"<br/>
 	Title: "${item.title}"<br/>
 	Owner: "${item.assignedUser.login}"<br/>
-	</div>
 </a>

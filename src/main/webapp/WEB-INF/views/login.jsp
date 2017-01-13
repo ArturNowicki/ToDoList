@@ -16,7 +16,7 @@
 		<c:url var="loginUrl" value="/login" />
 		<form action="${loginUrl}" method="post">
 			<c:if test="${param.error != null}">
-				<p>Invalid username and password.</p>
+				<p class="error">Invalid username and password.</p>
 			</c:if>
 			<c:if test="${param.logout != null}">
 				<p>You have been logged out successfully.</p>

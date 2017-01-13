@@ -12,10 +12,10 @@
 </head>
 
 <body>
-	Dear
-	<strong>${loggedUser}</strong>, You are not authorized to access this
-	page
-	<a href="<c:url value="/dashboard" />">Dashboard</a>
-	<a href="<c:url value="/logout" />">Logout</a>
+	<div class="element">
+		Dear <strong>${loggedUser}</strong>, You are not authorized to access
+		this page <a href="<c:url value="/dashboard" />">Dashboard</a> <a
+			href="<c:url value="/logout" />">Logout</a>
+	</div>
 </body>
 </html>
