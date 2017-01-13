@@ -53,7 +53,7 @@ public class ItemController {
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
 		model.addAttribute("loggedUser", util.getPrincipal());
-		return "additem";
+		return "edititem";
 	}
 
 	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.POST)
@@ -62,7 +62,7 @@ public class ItemController {
 		if (result.hasErrors()) {
 			model.addAttribute("users", userService.listAll());
 			model.addAttribute("tags", tagsService.listAll());
-			return "additem";
+			return "edititem";
 		}
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
 		item.setAssignedUser(user.get());

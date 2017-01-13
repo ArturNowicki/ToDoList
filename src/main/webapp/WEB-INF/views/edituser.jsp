@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -8,46 +9,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-<title>Add User</title>
-<script>
-	function check_pass() {
-		if (password.value == confirm_password.value) {
-			confirm_password.setCustomValidity("");
-		} else {
-			confirm_password.setCustomValidity("Passwords Don't Match");
-		}
-	}
-</script>
-
+<title>Edit User</title>
 </head>
 
 <body>
 	<%@include file="../jspf/menu.jspf"%>
 
 	<div class="element">
-		<h2>User Form</h2>
+		<h2>Edit User</h2>
 
 		<form:form method="POST" modelAttribute="user">
 			<form:input type="hidden" path="id" id="id" />
+			<form:input type="hidden" path="login" id="login" />
+			<form:input type="hidden" path="password" id="password" />
 			<table>
 				<tr>
-					<td><label for="login">Login: </label></td>
-					<td><form:input path="login" id="login" /></td>
+					<td><label>Login: </label></td>
+					<td><label>${user.login}</label></td>
 					<td><form:errors path="login" cssClass="error" /></td>
-				</tr>
-
-				<tr>
-					<td><label for="password">Password: </label></td>
-					<td><form:password path="password" id="password"
-							onchange='check_pass();' /></td>
-					<td><form:errors path="password" cssClass="error" /></td>
-				</tr>
-
-				<tr>
-					<td><label for="confirm_password">Confirm Password: </label></td>
-					<td><input type="password" id="confirm_password"
-							onchange='check_pass();' /></td>
-					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 
 				<tr>

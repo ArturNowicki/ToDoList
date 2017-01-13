@@ -1,16 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-<div align="left">Logged in as: <strong>${loggedUser}</strong></div>
-<br/>
-<div align="left"><a href="<c:url value="/logout" />">Logout</a></div>
-<table cellspacing="2" cellpadding="3" border="1" align="center"
-	style="width: 60%">
-	<col width="50%">
-	<col width="50%">
-	<tr>
-		<td><a href="dashboard"><div>Dashboard</div></a></td>
-		<td><a href="users"><div>Users</div></a></td>
-	</tr>
-</table>
+<div class="center">
+	<div style="float:left">Logged in as: <strong>${loggedUser}</strong></div>
+	<div style="float:right"><a href="<c:url value="/logout" />">Logout</a></div>
+</div>
+<br clear="all" />
+<div class="element">
+	<table border="1" align="center" style="width: 80%">
+		<col width="50%">
+		<col width="50%">
+		<tr>
+			<td><a href="dashboard">Dashboard</a></td>
+			<td><a href="users">Users</a></td>
+		</tr>
+	</table>
+</div>
 <br clear="all" />

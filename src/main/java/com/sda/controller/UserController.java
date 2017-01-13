@@ -74,14 +74,14 @@ public class UserController {
 		customUserDetailsService.loadUserByUsername(user.getLogin());
 		model.addAttribute("user", user);
 		model.addAttribute("loggedUser", util.getPrincipal());
-		return "adduser";
+		return "edituser";
 	}
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.POST)
 	public String updateUser(@PathVariable String id, @Valid User user, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return "adduser";
+			return "edituser";
 		}
 		User entity = userService.findById(Integer.valueOf(id));
 		if (!userService.isUserUnique(user.getLogin()) && !user.getLogin().equals(entity.getLogin())) {

@@ -20,6 +20,7 @@
 
 		<form:form method="POST" modelAttribute="item">
 			<form:input type="hidden" path="id" id="id" />
+			<form:input type="hidden" path="title" id="title" />
 			<form:input type="hidden" path="created" id="created" />
 			<form:input type="hidden" path="originalEstimate"
 				id="originalEstimate" />
@@ -31,7 +32,7 @@
 
 				<tr>
 					<td><label for="title">Title: </label></td>
-					<td><form:input path="title" id="title" /></td>
+					<td><label>${item.title}</label></td>
 					<td><form:errors path="title" cssClass="error" /></td>
 				</tr>
 
@@ -95,8 +96,10 @@
 				</tr>
 
 				<tr>
-					<td><label>Original estimate: </label></td>
-					<td>${item.originalEstimate}</td>
+					<td><label for="originalEstimate">Original estimate: </label></td>
+					<c:if test="${item.state != 'NEW'}" var="isNew" scope="page"></c:if>
+					<td><form:input path="originalEstimate" id="originalEstimate" disabled='${isNew}' /></td>
+					<td><form:errors path="originalEstimate" cssClass="error" /></td>
 				</tr>
 
 				<tr>
@@ -123,6 +126,7 @@
 				</tr>
 			</table>
 		</form:form>
+		<p>Trololo ${isNew}</p>
 	</div>
 </body>
 </html>

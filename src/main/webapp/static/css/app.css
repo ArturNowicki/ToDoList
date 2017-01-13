@@ -1,0 +1,45 @@
+.center {
+	margin: auto;
+	width: 60%;
+	padding: 10px;
+}
+
+.table {
+	border: 1px solid #555555;
+	background-color: #ccc;
+	text-align: center;
+}
+
+.element {
+	border: 1px solid #555555;
+	background-color: #ccc;
+	text-align: center;
+	margin: auto;
+	width: 60%;
+	padding: 10px;
+}
+
+.element-left {
+	border: 1px solid #555555;
+	background-color: #ccc;
+	text-align: left;
+	margin: auto;
+	width: 60%;
+	padding: 10px;
+}
+
+html{
+	background-color:#dee2e8;
+}
+
+body {
+	font-size:14px!important;
+}
+
+tr a {
+    display: block;
+}
+
+.error {
+	color: #ff0000;
+}
