@@ -32,6 +32,7 @@ public class User {
 
 	@Size(min = 3, max = 50)
 	@NotNull
+	@UserName
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
 
