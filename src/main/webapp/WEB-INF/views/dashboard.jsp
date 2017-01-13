@@ -15,8 +15,6 @@
 	<%@include file="../jspf/menu.jspf"%>
 	<div class="center table">
 		<h2>Dashboard</h2>
-	</div>
-	<div class="center table">
 		<table border="1" align="center" style="width: 80%">
 			<col width="25%">
 			<col width="25%">
@@ -69,6 +67,14 @@
 	<br />
 	<div align="right" style="width: 80%">
 		<a href="<c:url value='/newitem'/>">Add item</a>
+	</div>
+	<div class="center error">
+		<c:if test="${message != null}">
+			<p>${message}</p>
+		</c:if>
+		<c:if test="${error != null}">
+			<p>${error}</p>
+		</c:if>
 	</div>
 </body>
 </html>

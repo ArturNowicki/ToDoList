@@ -13,11 +13,6 @@
 
 <body>
 
-	<div class="center error">
-		<h4>${message}</h4>
-		<h4>${error}</h4>
-	</div>
-
 	<%@include file="../jspf/menu.jspf"%>
 
 	<div class="element">
@@ -49,5 +44,15 @@
 	<div align="right" style="width: 80%">
 		<a href="<c:url value='/newuser' />">Add User</a>
 	</div>
+	
+	<div class="center error">
+		<c:if test="${message != null}">
+			<p>${message}</p>
+		</c:if>
+		<c:if test="${error != null}">
+			<p>${error}</p>
+		</c:if>
+	</div>
+
 </body>
 </html>

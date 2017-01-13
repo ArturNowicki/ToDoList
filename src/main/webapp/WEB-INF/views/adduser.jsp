@@ -28,31 +28,30 @@
 		<h2>User Form</h2>
 
 		<form:form method="POST" modelAttribute="user">
-			<form:input type="hidden" path="id" id="id" />
 			<table>
 				<tr>
 					<td><label for="login">Login: </label></td>
-					<td><form:input path="login" id="login" /></td>
-					<td><form:errors path="login" cssClass="error" /></td>
+					<td><form:input path="login" id="login" placeholder="Enter Username"/></td>
+					<td><form:errors path="login" cssClass="error"/></td>
 				</tr>
 
 				<tr>
 					<td><label for="password">Password: </label></td>
-					<td><form:password path="password" id="password"
+					<td><form:password path="password" id="password" placeholder="Enter Password"
 							onchange='check_pass();' /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="confirm_password">Confirm Password: </label></td>
-					<td><input type="password" id="confirm_password"
+					<td><input type="password" id="confirm_password" placeholder="Confirm Password"
 							onchange='check_pass();' /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="email">E-Mail: </label></td>
-					<td><form:input path="email" id="email" /></td>
+					<td><form:input path="email" id="email" placeholder="Enter E-Mail"/></td>
 					<td><form:errors path="email" cssClass="error" /></td>
 				</tr>
 

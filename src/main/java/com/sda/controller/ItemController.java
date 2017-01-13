@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,16 +29,16 @@ public class ItemController {
 
 	@Autowired
 	ItemService itemService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	TagsService tagsService;
 
 	@Autowired
 	PrincipalUtil util;
-	
+
 	@RequestMapping(value = "/item-{id}", method = RequestMethod.GET)
 	public String itemDetails(@PathVariable String id, ModelMap model) {
 		Item item = itemService.findById(Integer.valueOf(id));
@@ -45,7 +46,30 @@ public class ItemController {
 		model.addAttribute("loggedUser", util.getPrincipal());
 		return "item";
 	}
-	
+
+	@RequestMapping(value = "/newitem", method = RequestMethod.GET)
+	public String addItem(ModelMap model) {
+		Item item = new Item();
+		model.addAttribute("item", item);
+		model.addAttribute("users", userService.listAll());
+		model.addAttribute("loggedUser", util.getPrincipal());
+		return "additem";
+	}
+
+	@RequestMapping(value = "/newitem", method = RequestMethod.POST)
+	public String saveItem(@Valid Item item, BindingResult result, RedirectAttributes redirectAttributes, ModelMap model) {
+		if(result.hasErrors()) {
+			model.addAttribute("users", userService.listAll());
+			model.addAttribute("tags", tagsService.listAll());
+			return "additem";
+		}
+		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
+		item.setAssignedUser(user.get());
+		itemService.save(item);
+		redirectAttributes.addFlashAttribute("message", "Item " + item.getTitle() + " added successfully");
+		return "redirect:/dashboard";
+	}
+
 	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.GET)
 	public String editItem(@PathVariable String id, ModelMap model) {
 		Item item = itemService.findById(Integer.valueOf(id));
@@ -67,9 +91,19 @@ public class ItemController {
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
 		item.setAssignedUser(user.get());
 		itemService.update(item);
-		redirectAttributes.addFlashAttribute("message", "Item " + item.getId() + ": " + item.getTitle() + " updated successfully");
-		return "redirect:/item-{id}";
+		redirectAttributes.addFlashAttribute("message",
+				"Item " + item.getTitle() + " updated successfully");
+		return "redirect:/dashboard";
+	}
+	
+	@RequestMapping(value = "/delete-{id}-item", method = RequestMethod.GET)
+	public String deleteItem(@PathVariable String id, RedirectAttributes redirectAttributes) {
+		try {
+			itemService.deleteById(Integer.valueOf(id));
+		} catch (DataIntegrityViolationException e) {
+			redirectAttributes.addFlashAttribute("error", "Could not delete item!");
+		}
+		return "redirect:/dashboard";
 	}
 
 }
-

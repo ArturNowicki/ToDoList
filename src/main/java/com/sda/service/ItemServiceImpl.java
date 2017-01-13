@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sda.dao.ItemDao;
+import com.sda.enums.State;
 import com.sda.model.Item;
 
 @Service("itemService")
@@ -28,6 +29,11 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public void save(Item item) {
+		item.setState(State.NEW);
+		item.setCreated(Date.valueOf(LocalDate.now()));
+		item.setModified(Date.valueOf(LocalDate.now()));
+		item.setCompletedHours(0);
+		item.setRemainingHours(item.getOriginalEstimate());
 		dao.add(item);
 	}
 

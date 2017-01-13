@@ -71,7 +71,6 @@ public class UserController {
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.GET)
 	public String editUser(@PathVariable String id, ModelMap model) {
 		User user = userService.findById(Integer.valueOf(id));
-		customUserDetailsService.loadUserByUsername(user.getLogin());
 		model.addAttribute("user", user);
 		model.addAttribute("loggedUser", util.getPrincipal());
 		return "edituser";

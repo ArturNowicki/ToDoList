@@ -28,9 +28,12 @@
 				</c:forEach>  -->
 		<br /> <br />
 		<form action='edit-${item.id}-item' method="get">
-			<input type="submit" value="Edit" /> <a href="dashboard"><input
-				type="button" value="Back" /></a>
+			<input type="submit" value="Edit" />
 		</form>
+		<a href="dashboard"><input type="button" value="Back" /></a>
+		<a href='delete-${item.id}-item'
+			onclick="return confirm('Delete ${item.title}?')"><input
+			type="submit" value="Delete" /></a>
 	</div>
 </body>
 </html>

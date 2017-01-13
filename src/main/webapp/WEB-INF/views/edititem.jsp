@@ -22,8 +22,10 @@
 			<form:input type="hidden" path="id" id="id" />
 			<form:input type="hidden" path="title" id="title" />
 			<form:input type="hidden" path="created" id="created" />
-			<form:input type="hidden" path="originalEstimate"
-				id="originalEstimate" />
+			<c:if test="${item.state != 'NEW'}">
+				<form:input type="hidden" path="originalEstimate"
+					id="originalEstimate" />
+			</c:if>
 			<table>
 				<tr>
 					<td><label>Id: </label></td>
@@ -31,9 +33,8 @@
 				</tr>
 
 				<tr>
-					<td><label for="title">Title: </label></td>
+					<td><label>Title: </label></td>
 					<td><label>${item.title}</label></td>
-					<td><form:errors path="title" cssClass="error" /></td>
 				</tr>
 
 				<tr>
@@ -55,11 +56,13 @@
 						</form:select></td>
 				</tr>
 
-				<!-- this can be done with dropdown list just like the above but i wanted to check how does error work -->
 				<tr>
 					<td><label for="severity">Severity: </label></td>
-					<td><form:input path="severity" id="severity" /></td>
-					<td><form:errors path="severity" cssClass="error" /></td>
+					<td><form:select path="severity" id="severity">
+							<form:option value="1">1</form:option>
+							<form:option value="2">2</form:option>
+							<form:option value="3">3</form:option>
+						</form:select></td>
 				</tr>
 
 				<tr>
@@ -95,12 +98,14 @@
 					<td>${item.modified}</td>
 				</tr>
 
-				<tr>
-					<td><label for="originalEstimate">Original estimate: </label></td>
-					<c:if test="${item.state != 'NEW'}" var="isNew" scope="page"></c:if>
-					<td><form:input path="originalEstimate" id="originalEstimate" disabled='${isNew}' /></td>
-					<td><form:errors path="originalEstimate" cssClass="error" /></td>
-				</tr>
+				<c:if test="${item.state == 'NEW'}">
+					<tr>
+						<td><label for="originalEstimate">Original estimate:
+						</label></td>
+						<td><form:input path="originalEstimate" id="originalEstimate" /></td>
+						<td><form:errors path="originalEstimate" cssClass="error" /></td>
+					</tr>
+				</c:if>
 
 				<tr>
 					<td><label for="completedHours">Completed hours: </label></td>
@@ -126,7 +131,6 @@
 				</tr>
 			</table>
 		</form:form>
-		<p>Trololo ${isNew}</p>
 	</div>
 </body>
 </html>

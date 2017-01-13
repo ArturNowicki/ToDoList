@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.sda.enums.ItemType;
 import com.sda.enums.State;
@@ -33,6 +34,7 @@ public class Item {
 	@Column(name = "id", nullable = false, unique = true, length = 11)
 	private int id;
 
+	@NotNull
 	@Column(name = "title", nullable = false, length = 50)
 	private String title;
 
