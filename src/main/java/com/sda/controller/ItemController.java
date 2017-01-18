@@ -64,8 +64,9 @@ public class ItemController {
 			return "additem";
 		}
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
+		System.out.println("!!!!!!!!!!!!!!!Controller " + user.get());
 		item.setAssignedUser(user.get());
-		user = userService.findByLogin(item.getCreatedBy().getLogin());
+		user = userService.findByLogin(util.getPrincipal());
 		item.setCreatedBy(user.get());
 		itemService.save(item);
 		redirectAttributes.addFlashAttribute("message", "Item " + item.getTitle() + " added successfully");
