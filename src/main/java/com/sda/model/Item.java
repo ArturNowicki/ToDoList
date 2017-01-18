@@ -21,6 +21,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.sda.enums.ItemType;
 import com.sda.enums.State;
@@ -35,9 +36,11 @@ public class Item {
 	private int id;
 
 	@NotNull
+	@Size(min=2, max=50)
 	@Column(name = "title", nullable = false, length = 50)
 	private String title;
 
+	@Size(max=1000)
 	@Column(name = "body", length = 1000)
 	private String body;
 
@@ -78,12 +81,15 @@ public class Item {
 	@Column(name = "modified", nullable = false)
 	private Date modified;
 
+	@Max(99999)
 	@Column(name = "originalEstimate", nullable = false)
 	private int originalEstimate;
 
+	@Max(99999)
 	@Column(name = "remainingHours", nullable = false)
 	private int remainingHours;
 
+	@Max(99999)
 	@Column(name = "completedHours", nullable = false)
 	private int completedHours;
 

@@ -22,6 +22,7 @@
 				<td>ID</td>
 				<td>NAME</td>
 				<td>CONTACT</td>
+				<td>TYPE</td>
 			</tr>
 			<c:forEach items="${users}" var="users">
 				<tr>

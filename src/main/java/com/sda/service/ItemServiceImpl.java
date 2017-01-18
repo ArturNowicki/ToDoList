@@ -56,7 +56,9 @@ public class ItemServiceImpl implements ItemService {
 			entity.setCompletedHours(item.getCompletedHours());
 			entity.setCreated(item.getCreated());
 			entity.setModified(Date.valueOf(LocalDate.now()));
-			entity.setOriginalEstimate(item.getOriginalEstimate());
+			if(item.getState().equals(State.NEW)) {
+				entity.setOriginalEstimate(item.getOriginalEstimate());
+			}
 			entity.setPriority(item.getPriority());
 			entity.setRemainingHours(item.getRemainingHours());
 			entity.setSeverity(item.getSeverity());
