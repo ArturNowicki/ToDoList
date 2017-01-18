@@ -16,7 +16,7 @@
 <body>
 	<%@include file="../jspf/menu.jspf"%>
 
-	<div class="element">
+	<div class="element-left">
 		<h2>User Form</h2>
 
 		<form:form method="POST" modelAttribute="user">

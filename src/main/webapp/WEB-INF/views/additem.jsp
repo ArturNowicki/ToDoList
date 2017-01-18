@@ -15,11 +15,11 @@
 <body>
 	<%@include file="../jspf/menu.jspf"%>
 
-	<div class="element">
+	<div class="element-left">
 		<h2>Item Form</h2>
 
 		<form:form method="POST" modelAttribute="item">
-			<form:input path="createdBy" value="${loggedUser}" id="createdBy"/>
+			<form:input type="hidden" path="createdBy" value="${loggedUser}" id="createdBy"/>
 			<table>
 				<tr>
 					<td><label for="title">Title: </label></td>

@@ -15,7 +15,7 @@
 <body>
 	<%@include file="../jspf/menu.jspf"%>
 
-	<div class="element">
+	<div class="element-left">
 		<h2>Edit User</h2>
 
 		<form:form method="POST" modelAttribute="user">
@@ -31,7 +31,7 @@
 
 				<tr>
 					<td><label for="email">E-Mail: </label></td>
-					<td><form:input path="email" id="email" /></td>
+					<td><form:input path="email" id="email" autofocus="autofocus"/></td>
 					<td><form:errors path="email" cssClass="error" /></td>
 				</tr>
 

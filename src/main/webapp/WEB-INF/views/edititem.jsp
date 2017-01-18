@@ -15,8 +15,8 @@
 <body>
 	<%@include file="../jspf/menu.jspf"%>
 
-	<div class="element">
-		<h2>Item Form</h2>
+	<div class="element-left">
+		<h2>Edit Item</h2>
 
 		<form:form method="POST" modelAttribute="item">
 			<form:input type="hidden" path="id" id="id" />
@@ -40,7 +40,7 @@
 				<tr>
 					<td><label>Type: </label></td>
 					<td><form:select path="type" id="type">
-							<form:options items="${types}" />
+							<form:options items="${types}"/>
 						</form:select></td>
 					<td><form:errors path="type" cssClass="error" /></td>
 				</tr>
@@ -102,7 +102,7 @@
 					<tr>
 						<td><label for="originalEstimate">Original estimate:
 						</label></td>
-						<td><form:input path="originalEstimate" id="originalEstimate" /></td>
+						<td><form:input path="originalEstimate" id="originalEstimate" autofocus="autofocus" /></td>
 						<td><form:errors path="originalEstimate" cssClass="error" /></td>
 					</tr>
 				</c:if>
