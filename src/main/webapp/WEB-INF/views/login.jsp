@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<div class="element">
+	<div class="login-box">
 		<c:url var="loginUrl" value="/login" />
 		<form action="${loginUrl}" method="post">
 			<c:if test="${param.error != null}">
@@ -23,7 +23,7 @@
 			</c:if>
 			<div>
 				<label for="login"></label> <input type="text" id="login"
-					name="login" placeholder="Enter Username" required>
+					name="login" placeholder="Enter Username" required autofocus>
 			</div>
 			<div>
 				<label for="password"></label> <input type="password" id="password"
