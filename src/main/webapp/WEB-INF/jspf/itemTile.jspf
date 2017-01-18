@@ -1,6 +1,6 @@
-
-<a href="<c:url value='/item-${item.id}' /> ">
-	ID: "${item.id}"<br/>
-	Title: "${item.title}"<br/>
-	Owner: "${item.assignedUser.login}"<br/>
-</a>
+<div class="item-tile">
+	<a href="<c:url value='/item-${item.id}' />" id="item-link"> ID:
+		"${item.id}"<br /> Title: "${item.title}"<br /> Owner:
+		"${item.assignedUser.login}"
+	</a>
+</div>

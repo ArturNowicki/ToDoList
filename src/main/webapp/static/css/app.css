@@ -5,15 +5,43 @@
 	padding: 10px;
 }
 
+#regress {
+	float: left;
+	width: 5%;
+	height: inherit;
+	background-color: red;
+}
+
+#advance{
+	float: right;
+	width: 5%;
+	height: inherit;
+	background-color: green;
+}
+
+.item-tile {
+	background-color: #88a1c9;	
+	border-style: outset;
+}
+
 .table {
 	border: 1px solid #555555;
-	background-color: #ccc;
+	background-color: #d7dfed;
 	text-align: center;
+}
+
+.item-tile:hover {
+	background-color: #90b1e5;
+	border-style: inset;
+}
+
+#item-link {
+	color: black;
 }
 
 .element {
 	border: 1px solid #555555;
-	background-color: #ccc;
+	background-color: #d7dfed;
 	text-align: center;
 	margin: auto;
 	width: 60%;
@@ -23,7 +51,7 @@
 
 .element-left {
 	border: 1px solid #555555;
-	background-color: #ccc;
+	background-color: #d7dfed;
 	text-align: left;
 	margin: auto;
 	width: 60%;
@@ -33,7 +61,7 @@
 
 .login-box {
 	border: 1px solid #555555;
-	background-color: #ccc;
+	background-color: #d7dfed;
 	text-align: center;
 	margin: auto;
 	width: 14%;
