@@ -25,7 +25,7 @@ CREATE TABLE Tag(
 CREATE TABLE Item(
     id INT(11) NOT NULL auto_increment,
     title VARCHAR(50) NOT NULL,
-    body VARCHAR(50),
+    body VARCHAR(1000),
 	itemType ENUM('BUG', 'TASK', 'FEATURE') NOT NULL,
     priority INT(1) NOT NULL CHECK(NumericField BETWEEN 1 AND 5),
     severity INT(1) NOT NULL CHECK(NumericField BETWEEN 1 AND 3),
@@ -77,3 +77,4 @@ INSERT INTO ItemTags (idTag, idItem) Values (1,1), (2, 1), (1,2), (3, 2);
 Select i.id, i.title from Item i join ItemTags it on (it.idItem=i.id);
 
 SELECT * FROM USER;
+

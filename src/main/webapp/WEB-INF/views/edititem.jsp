@@ -76,7 +76,7 @@
 
 				<tr>
 					<td><label for="body">Message: </label></td>
-					<td><form:textarea path="body" id="body" /></td>
+					<td><form:textarea path="body" id="body" maxlength="1000"/></td>
 					<td><form:errors path="body" cssClass="error" /></td>
 				</tr>
 
@@ -102,20 +102,20 @@
 					<tr>
 						<td><label for="originalEstimate">Original estimate:
 						</label></td>
-						<td><form:input path="originalEstimate" id="originalEstimate" autofocus="autofocus" /></td>
+						<td><form:input path="originalEstimate" id="originalEstimate" autofocus="autofocus" maxlength="5"/></td>
 						<td><form:errors path="originalEstimate" cssClass="error" /></td>
 					</tr>
 				</c:if>
 
 				<tr>
 					<td><label for="completedHours">Completed hours: </label></td>
-					<td><form:input path="completedHours" id="completedHours" /></td>
+					<td><form:input path="completedHours" id="completedHours" maxlength="5"/></td>
 					<td><form:errors path="completedHours" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="remainingHours">Remaining hours: </label></td>
-					<td><form:input path="remainingHours" id="remainingHours" /></td>
+					<td><form:input path="remainingHours" id="remainingHours" maxlength="5"/></td>
 					<td><form:errors path="remainingHours" cssClass="error" /></td>
 				</tr>
 

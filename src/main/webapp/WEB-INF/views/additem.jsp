@@ -23,7 +23,7 @@
 			<table>
 				<tr>
 					<td><label for="title">Title: </label></td>
-					<td><form:input path="title" id="title" placeholder="Enter Title" required="required" autofocus="autorocus"/></td>
+					<td><form:input path="title" id="title" placeholder="Enter Title" required="required" autofocus="autorocus" maxlength="50"/></td>
 					<td><form:errors path="title" cssClass="error" /></td>
 				</tr>
 
@@ -66,13 +66,13 @@
 
 				<tr>
 					<td><label for="body">Message: </label></td>
-					<td><form:textarea path="body" id="body" placeholder="Enter description"/></td>
+					<td><form:textarea path="body" id="body" placeholder="Enter description" maxlength="1000"/></td>
 					<td><form:errors path="body" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label>Original estimate: </label></td>
-					<td><form:input path="originalEstimate" id="originalEstimate"/></td>
+					<td><form:input path="originalEstimate" id="originalEstimate" maxlength="5"/></td>
 					<td><form:errors path="originalEstimate" cssClass="error" /></td>
 				</tr>
 

@@ -31,7 +31,7 @@
 
 				<tr>
 					<td><label for="email">E-Mail: </label></td>
-					<td><form:input path="email" id="email" autofocus="autofocus"/></td>
+					<td><form:input path="email" id="email" autofocus="autofocus" maxlength="50"/></td>
 					<td><form:errors path="email" cssClass="error" /></td>
 				</tr>
 

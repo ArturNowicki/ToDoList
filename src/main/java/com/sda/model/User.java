@@ -77,7 +77,7 @@ public class User {
 	}
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.login = login.toLowerCase();
 	}
 
 	public String getPassword() {

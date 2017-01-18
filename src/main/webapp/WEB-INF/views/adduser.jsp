@@ -9,9 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+<script src="${pageContext.request.contextPath}/static/js/checkPass.js"></script>
 <title>Add User</title>
-<script src="${pageContext.request.contextPath}/static/js/check_pass.js"></script>
- </head>
+</head>
 
 <body>
 	<%@include file="../jspf/menu.jspf"%>
@@ -24,30 +24,30 @@
 				<tr>
 					<td><label for="login">Login: </label></td>
 					<td><form:input path="login" id="login"
-							placeholder="Enter Username" autofocus="autofocus"/></td>
+							placeholder="Enter Username" autofocus="autofocus" maxlength="50" /></td>
 					<td><form:errors path="login" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="password">Password: </label></td>
 					<td><form:password path="password" id="password"
-							placeholder="Enter Password"
-							onchange="check_pass(password, confirm_password)" /></td>
+							placeholder="Enter Password" maxlength="50"
+							onchange="checkPass(password, confirmPassword)" /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 
 				<tr>
-					<td><label for="confirm_password">Confirm Password: </label></td>
-					<td><input type="password" id="confirm_password"
-						placeholder="Confirm Password"
-						onchange="check_pass(password, confirm_password)" /></td>
+					<td><label for="confirmPassword">Confirm Password: </label></td>
+					<td><input type="password" id="confirmPassword"
+						placeholder="Confirm Password" maxlength="50"
+						onchange="checkPass(password, confirmPassword)" /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="email">E-Mail: </label></td>
 					<td><form:input path="email" id="email"
-							placeholder="Enter E-Mail" /></td>
+							placeholder="Enter E-Mail" maxlength="50" /></td>
 					<td><form:errors path="email" cssClass="error" /></td>
 				</tr>
 

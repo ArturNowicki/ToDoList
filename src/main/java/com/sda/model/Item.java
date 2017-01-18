@@ -38,7 +38,7 @@ public class Item {
 	@Column(name = "title", nullable = false, length = 50)
 	private String title;
 
-	@Column(name = "body", length = 50)
+	@Column(name = "body", length = 1000)
 	private String body;
 
 	@Enumerated(EnumType.STRING)
