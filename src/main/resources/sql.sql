@@ -32,13 +32,15 @@ CREATE TABLE Item(
     userId INT(11) NOT NULL,
     state ENUM('NEW', 'ACTIVE', 'RESOLVED', 'CLOSED') NOT NULL,
     created DATE NOT NULL,
+    createdBy INT(11) NOT NULL,
     modified DATE,
     originalEstimate INT(5) NOT NULL,
     remainingHours INT(5) NOT NULL,
     completedHours INT(5) NOT NULL,
 
     PRIMARY KEY (id),
-    CONSTRAINT FOREIGN KEY (userId) REFERENCES User (id)
+    CONSTRAINT FOREIGN KEY (userId) REFERENCES User (id),
+    CONSTRAINT FOREIGN KEY (createdBy) REFERENCES User (id)
 );
 
 CREATE TABLE ItemTags(
@@ -58,14 +60,14 @@ select * from user;
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');
 
 INSERT INTO Item(title, body, itemType, priority, severity, userId,
-	state, created, originalEstimate, remainingHours, completedHours)
-    VALUES ('TestTask', 'First task for system tests', 1, 3, 1, 3,
-    'ACTIVE', curdate(), 50, 50, 0);
+	state, created, createdBy, originalEstimate, remainingHours, completedHours)
+    VALUES ('password validation', 'confirm password with JS', 2, 3, 2, 1,
+    'RESOLVED', curdate(), 1, 20, 0, 15);
 
 INSERT INTO Item(title, body, itemType, priority, severity, userId,
-	state, created, originalEstimate, remainingHours, completedHours)
-    VALUES ('TestTask2', 'Second task for system tests', 2, 2, 2, 2,
-    'NEW', curdate(), 24, 8, 18);
+	state, created, createdBy, originalEstimate, remainingHours, completedHours)
+    VALUES ('external JS', 'external JS not working', 'BUG', 3, 2, 1,
+    'NEW', curdate(), 1, 10, 0, 12);
 
     
 SELECT i.id, i.title, i.body FROM Item i

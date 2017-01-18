@@ -50,7 +50,10 @@ public class User {
 	private UserProfileType userType;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assignedUser")
-	private List<Item> itemsList = new ArrayList<Item>();
+	private List<Item> ownedItemsList = new ArrayList<Item>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
+	private List<Item> createdItemsList = new ArrayList<Item>();
 
 	public User() {
 	}
@@ -59,10 +62,8 @@ public class User {
 		this.login = login.toLowerCase();
 	}
 
-	public List<Item> getItemsList() {
-		return itemsList;
-	}
-
+//	getters&setters
+	
 	public int getId() {
 		return id;
 	}
@@ -76,7 +77,7 @@ public class User {
 	}
 
 	public void setLogin(String login) {
-		this.login = login.toLowerCase();
+		this.login = login;
 	}
 
 	public String getPassword() {
@@ -92,11 +93,7 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		this.email = email.toLowerCase();
-	}
-
-	public void setItemsList(List<Item> itemsList) {
-		this.itemsList = itemsList;
+		this.email = email;
 	}
 
 	public UserProfileType getUserType() {
@@ -106,6 +103,23 @@ public class User {
 	public void setUserType(UserProfileType userType) {
 		this.userType = userType;
 	}
+
+	public List<Item> getOwnedItemsList() {
+		return ownedItemsList;
+	}
+
+	public void setOwnedItemsList(List<Item> ownedItemsList) {
+		this.ownedItemsList = ownedItemsList;
+	}
+
+	public List<Item> getCreatedItemsList() {
+		return createdItemsList;
+	}
+
+	public void setCreatedItemsList(List<Item> createdItemsList) {
+		this.createdItemsList = createdItemsList;
+	}
+
 
 	@Override
 	public int hashCode() {

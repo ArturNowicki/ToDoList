@@ -71,6 +71,10 @@ public class Item {
 	@Column(name = "created", nullable = false)
 	private Date created;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "createdBy")
+	private User createdBy;
+	
 	@Column(name = "modified", nullable = false)
 	private Date modified;
 
@@ -163,6 +167,14 @@ public class Item {
 		this.created = created;
 	}
 
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public Date getModified() {
 		return modified;
 	}
@@ -198,11 +210,9 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", title=" + title + ", body=" + body + ", type=" + type + ", priority=" + priority
-				+ ", severity=" + severity
-				+ ", tags=" + tags
-				+ ", assignedTo=" + assignedUser + ", state=" + state + ", created=" + created + ", modified="
-				+ modified + ", originalEstimate=" + originalEstimate + ", remainingHours=" + remainingHours
-				+ ", completedHours=" + completedHours + "]";
+				+ ", severity=" + severity + ", tags=" + tags + ", assignedUser=" + assignedUser + ", state=" + state
+				+ ", created=" + created + ", createdBy=" + createdBy + ", modified=" + modified + ", originalEstimate="
+				+ originalEstimate + ", remainingHours=" + remainingHours + ", completedHours=" + completedHours + "]";
 	}
 
 	@Override

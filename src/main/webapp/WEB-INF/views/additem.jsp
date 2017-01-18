@@ -19,10 +19,11 @@
 		<h2>Item Form</h2>
 
 		<form:form method="POST" modelAttribute="item">
+			<form:input path="createdBy" value="${loggedUser}" id="createdBy"/>
 			<table>
 				<tr>
 					<td><label for="title">Title: </label></td>
-					<td><form:input path="title" id="title" placeholder="Enter Title" required="required" /></td>
+					<td><form:input path="title" id="title" placeholder="Enter Title" required="required" autofocus="autorocus"/></td>
 					<td><form:errors path="title" cssClass="error" /></td>
 				</tr>
 

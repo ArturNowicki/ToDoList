@@ -65,6 +65,8 @@ public class ItemController {
 		}
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
 		item.setAssignedUser(user.get());
+		user = userService.findByLogin(item.getCreatedBy().getLogin());
+		item.setCreatedBy(user.get());
 		itemService.save(item);
 		redirectAttributes.addFlashAttribute("message", "Item " + item.getTitle() + " added successfully");
 		return "redirect:/dashboard";

@@ -19,7 +19,8 @@
 		"${item.type}" <br /> Priority: "${item.priority}" <br /> Severity:
 		"${item.severity}" <br /> Owner: "${item.assignedUser.login}" <br />
 		Message: "${item.body}" <br /> State: "${item.state}" <br />
-		Created: "${item.created}" <br /> Modified: "${item.modified}" <br />
+		Created: "${item.created}" <br /> Created by:"${item.createdBy.login}" <br />
+		Modified: "${item.modified}" <br />
 		Original estimate: "${item.originalEstimate}" <br /> Completed hours:
 		"${item.completedHours}" <br /> Remaining hours:
 		"${item.remainingHours}"
@@ -42,7 +43,7 @@
 					type="submit" value="Delete" /></a>
 			</div>
 		</div>
-		<br style="clear:all;"/>
+		<br style="clear: all;" />
 	</div>
 </body>
 </html>

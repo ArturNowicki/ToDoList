@@ -30,7 +30,7 @@
 				<c:choose>
 					<c:when test="${item.state == 'NEW'}">
 						<tr>
-							<td><%@include file="../jspf/tasktab.jspf"%></td>
+							<td><%@include file="../jspf/itemTile.jspf"%></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -39,7 +39,7 @@
 					<c:when test="${item.state == 'ACTIVE'}">
 						<tr>
 							<td></td>
-							<td><%@include file="../jspf/tasktab.jspf"%></td>
+							<td><%@include file="../jspf/itemTile.jspf"%></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -48,7 +48,7 @@
 						<tr>
 							<td></td>
 							<td></td>
-							<td><%@include file="../jspf/tasktab.jspf"%></td>
+							<td><%@include file="../jspf/itemTile.jspf"%></td>
 							<td></td>
 						</tr>
 					</c:when>
@@ -57,7 +57,7 @@
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><%@include file="../jspf/tasktab.jspf"%></td>
+							<td><%@include file="../jspf/itemTile.jspf"%></td>
 						</tr>
 					</c:when>
 				</c:choose>
