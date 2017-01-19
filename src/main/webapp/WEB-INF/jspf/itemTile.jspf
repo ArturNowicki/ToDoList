@@ -1,6 +1,18 @@
 <div class="item-tile">
 	<a href="<c:url value='/item-${item.id}' />" id="item-link"> ID:
-		"${item.id}"<br /> Title: "${item.title}"<br /> Owner:
-		"${item.assignedUser.login}"
+		Title: ${item.title}<br />
+		Owner: ${item.assignedUser.login}<br />
+		O: ${item.originalEstimate} C: ${item.completedHours} R: ${item.remainingHours}
 	</a>
 </div>
+<div class="navig leftn">
+<a href="<c:url value='/item-${item.id}-backward' />">
+	<img src="<c:url value='static/img/double_arrow_left.png'/>" />
+</a>
+</div>
+<div class="navig rightn">
+<a href="<c:url value='/item-${item.id}-forward' />">
+	<img src="<c:url value='static/img/double_arrow_right.png'/>" />
+</a>
+</div>
+<br clear="all"/>

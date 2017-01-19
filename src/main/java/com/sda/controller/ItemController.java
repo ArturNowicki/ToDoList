@@ -57,14 +57,14 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/newitem", method = RequestMethod.POST)
-	public String saveItem(@Valid Item item, BindingResult result, RedirectAttributes redirectAttributes, ModelMap model) {
-		if(result.hasErrors()) {
+	public String saveItem(@Valid Item item, BindingResult result, RedirectAttributes redirectAttributes,
+			ModelMap model) {
+		if (result.hasErrors()) {
 			model.addAttribute("users", userService.listAll());
 			model.addAttribute("tags", tagsService.listAll());
 			return "additem";
 		}
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
-		System.out.println("!!!!!!!!!!!!!!!Controller " + user.get());
 		item.setAssignedUser(user.get());
 		user = userService.findByLogin(util.getPrincipal());
 		item.setCreatedBy(user.get());
@@ -76,7 +76,6 @@ public class ItemController {
 	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.GET)
 	public String editItem(@PathVariable String id, ModelMap model) {
 		Item item = itemService.findById(Integer.valueOf(id));
-		System.out.println("item: " + item);
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
 		model.addAttribute("loggedUser", util.getPrincipal());
@@ -84,7 +83,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.POST)
-	public String updateItem(@PathVariable String id, @Valid Item item, BindingResult result,
+	public String updateItem(@Valid Item item, BindingResult result,
 			RedirectAttributes redirectAttributes, ModelMap model) {
 		if (result.hasErrors()) {
 			model.addAttribute("users", userService.listAll());
@@ -94,11 +93,10 @@ public class ItemController {
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
 		item.setAssignedUser(user.get());
 		itemService.update(item);
-		redirectAttributes.addFlashAttribute("message",
-				"Item " + item.getTitle() + " updated successfully");
+		redirectAttributes.addFlashAttribute("message", "Item " + item.getTitle() + " updated successfully");
 		return "redirect:/dashboard";
 	}
-	
+
 	@RequestMapping(value = "/delete-{id}-item", method = RequestMethod.GET)
 	public String deleteItem(@PathVariable String id, RedirectAttributes redirectAttributes) {
 		try {
@@ -106,6 +104,18 @@ public class ItemController {
 		} catch (DataIntegrityViolationException e) {
 			redirectAttributes.addFlashAttribute("error", "Could not delete item!");
 		}
+		return "redirect:/dashboard";
+	}
+
+	@RequestMapping(value = "/item-{id}-forward", method = RequestMethod.GET)
+	public String advanceItemState(@PathVariable String id, RedirectAttributes redirectAttributes) {
+		itemService.itemStateForward(Integer.valueOf(id));
+		return "redirect:/dashboard";
+	}
+
+	@RequestMapping(value = "/item-{id}-backward", method = RequestMethod.GET)
+	public String revertItemState(@PathVariable String id, RedirectAttributes redirectAttributes) {
+		itemService.itemStateBack(Integer.valueOf(id));
 		return "redirect:/dashboard";
 	}
 

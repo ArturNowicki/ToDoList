@@ -9,8 +9,6 @@ public interface UserService {
 
     User findById(int id);
     
-    Optional<User> findByLogin(String login);
-
     void save(User user);
 
     void deleteById(int id);
@@ -19,6 +17,8 @@ public interface UserService {
     
     void update(User user);
     
+    Optional<User> findByLogin(String login);
+
 	boolean isUserUnique(String login);
 
 }

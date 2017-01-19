@@ -13,9 +13,9 @@
 <body>
 
 	<%@include file="../jspf/menu.jspf"%>
-	<div class="center table">
+	<div class="center dashboard">
 		<h2>Dashboard</h2>
-		<table border="1" align="center" style="width: 80%">
+		<table class="table">
 			<col width="25%">
 			<col width="25%">
 			<col width="25%">

@@ -46,7 +46,7 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> listAll() {
 		return dao.listAll();
 	}
-
+	
 	@Override
 	public void update(Item item) {
 		Item entity = dao.findById(item.getId());
@@ -54,7 +54,6 @@ public class ItemServiceImpl implements ItemService {
 			entity.setAssignedUser(item.getAssignedUser());
 			entity.setBody(item.getBody());
 			entity.setCompletedHours(item.getCompletedHours());
-			entity.setCreated(item.getCreated());
 			entity.setModified(Date.valueOf(LocalDate.now()));
 			if(item.getState().equals(State.NEW)) {
 				entity.setOriginalEstimate(item.getOriginalEstimate());
@@ -62,11 +61,31 @@ public class ItemServiceImpl implements ItemService {
 			entity.setPriority(item.getPriority());
 			entity.setRemainingHours(item.getRemainingHours());
 			entity.setSeverity(item.getSeverity());
-			entity.setState(item.getState());
 			entity.setTags(item.getTags());
-			entity.setTitle(item.getTitle());
 			entity.setType(item.getType());
 			entity.setSeverity(item.getSeverity());
+		}
+	}
+	
+	@Override
+	public void itemStateBack(int id) {
+		Item entity = dao.findById(id);
+		State currentState = entity.getState();
+		if(!currentState.equals(State.NEW)) {
+			int val = currentState.getValue() - 1;
+			State newState = State.values()[val];
+			entity.setState(newState);
+		}
+	}
+	
+	@Override
+	public void itemStateForward(int id) {
+		Item entity = dao.findById(id);
+		State currentState = entity.getState();
+		if(!currentState.equals(State.CLOSED)) {
+			int val = currentState.getValue() + 1;
+			State newState = State.values()[val];
+			entity.setState(newState);
 		}
 	}
 

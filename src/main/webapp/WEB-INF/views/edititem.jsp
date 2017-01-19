@@ -19,9 +19,10 @@
 		<h2>Edit Item</h2>
 
 		<form:form method="POST" modelAttribute="item">
-			<form:input type="hidden" path="id" id="id" />
-			<form:input type="hidden" path="title" id="title" />
-			<form:input type="hidden" path="created" id="created" />
+			<form:input type="hidden" path="id"/>
+			<form:input type="hidden" path="title"/>
+			<form:input type="hidden" path="created"/>
+			<form:input type="hidden" path="state"/>
 			<c:if test="${item.state != 'NEW'}">
 				<form:input type="hidden" path="originalEstimate"
 					id="originalEstimate" />
@@ -78,14 +79,6 @@
 					<td><label for="body">Message: </label></td>
 					<td><form:textarea path="body" id="body" maxlength="1000"/></td>
 					<td><form:errors path="body" cssClass="error" /></td>
-				</tr>
-
-				<tr>
-					<td><label>State: </label></td>
-					<td><form:select path="state" id="state">
-							<form:options />
-						</form:select></td>
-					<td><form:errors path="state" cssClass="error" /></td>
 				</tr>
 
 				<tr>

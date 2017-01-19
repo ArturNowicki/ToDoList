@@ -15,4 +15,8 @@ public interface ItemService {
 	List<Item> listAll();
 
 	void update(Item item);
+	
+	void itemStateBack(int itemId);
+
+	void itemStateForward(int itemId);
 }

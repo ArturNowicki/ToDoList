@@ -8,7 +8,7 @@
 </div>
 <br style="clear: all;" />
 <div class="element">
-	<table border="1" align="center" style="width: 80%">
+	<table class="table">
 		<col width="50%">
 		<col width="50%">
 		<tr>
