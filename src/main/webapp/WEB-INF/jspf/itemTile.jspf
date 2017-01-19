@@ -6,12 +6,14 @@
 		O: ${item.originalEstimate} C: ${item.completedHours} R: ${item.remainingHours}
 	</a>
 </div>
-<c:if test="${item.state != 'CLOSED'}" var="isClosed">
-	<div class="navig leftn">
-		<a href="<c:url value='/item-${item.id}-backward' />">
-			<img src="<c:url value='static/img/double_arrow_left.png'/>" />
-		</a>
-	</div>
+<c:if test="${item.state != 'CLOSED'}">
+	<c:if test="${item.state != 'NEW'}" var="isNew">
+		<div class="navig leftn">
+			<a href="<c:url value='/item-${item.id}-backward' />">
+				<img src="<c:url value='static/img/double_arrow_left.png'/>" />
+			</a>
+		</div>
+		</c:if>
 	<div class="navig rightn">
 		<a href="<c:url value='/item-${item.id}-forward' />">
 			<img src="<c:url value='static/img/double_arrow_right.png'/>" />

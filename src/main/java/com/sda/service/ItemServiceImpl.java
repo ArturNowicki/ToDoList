@@ -85,6 +85,9 @@ public class ItemServiceImpl implements ItemService {
 		if(!currentState.equals(State.CLOSED)) {
 			int val = currentState.getValue() + 1;
 			State newState = State.values()[val];
+			if(newState.equals(State.RESOLVED) || newState.equals(State.CLOSED)) {
+				entity.setRemainingHours(0);
+			}
 			entity.setState(newState);
 		}
 	}
