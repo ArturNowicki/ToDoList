@@ -71,7 +71,7 @@ public class ItemServiceImpl implements ItemService {
 	public void itemStateBack(int id) {
 		Item entity = dao.findById(id);
 		State currentState = entity.getState();
-		if(!currentState.equals(State.NEW)) {
+		if(!currentState.equals(State.NEW) && !currentState.equals(State.CLOSED)) {
 			int val = currentState.getValue() - 1;
 			State newState = State.values()[val];
 			entity.setState(newState);
