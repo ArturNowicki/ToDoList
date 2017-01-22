@@ -10,6 +10,8 @@ public interface UserDao {
 	User findById(int id);
 
 	Optional<User> findByLogin(String login);
+	
+	Optional<User> findByEmail(String email);
 
 	void add(User user);
 

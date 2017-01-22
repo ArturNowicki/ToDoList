@@ -41,4 +41,11 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 		criteria.add(Restrictions.eq("login", login.toLowerCase()));
 		return Optional.ofNullable((User) criteria.uniqueResult());
 	}
+
+	@Override
+	public Optional<User> findByEmail(String email) {
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq("email", email));
+		return Optional.ofNullable((User) criteria.uniqueResult());
+	}
 }

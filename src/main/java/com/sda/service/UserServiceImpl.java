@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sda.dao.UserDao;
+import com.sda.model.PasswordResetToken;
 import com.sda.model.User;
 
 @Service("userService")
@@ -29,6 +30,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> findByLogin(String login) {
 		return dao.findByLogin(login);
+	}
+
+	@Override
+	public Optional<User> findByEmail(String email) {
+		return dao.findByEmail(email);
 	}
 
 	@Override
@@ -66,5 +72,12 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 	}
+
+	@Override
+	public void createPasswordResetTokenForUser(User user, String token) {
+		PasswordResetToken resetToken = new PasswordResetToken(token, user);
+	}
+	
+	
 
 }

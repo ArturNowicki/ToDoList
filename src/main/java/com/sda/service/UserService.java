@@ -18,7 +18,11 @@ public interface UserService {
     void update(User user);
     
     Optional<User> findByLogin(String login);
+    
+	Optional<User> findByEmail(String email);
 
 	boolean isUserUnique(String login);
+
+	void createPasswordResetTokenForUser(User user, String token);
 
 }

@@ -66,7 +66,7 @@
 	</div>
 	<br />
 	<div align="right" style="width: 80%">
-		<a href="<c:url value='/newitem'/>">Add item</a>
+		<a href="<c:url value='/newitem'/>">Add Item</a>
 	</div>
 	<div class="center error">
 		<c:if test="${message != null}">

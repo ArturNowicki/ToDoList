@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-<title>Login page</title>
+<title>Login Page</title>
 </head>
 
 <body>
@@ -33,9 +33,11 @@
 				value="${_csrf.token}" />
 
 			<div class="form-actions">
-				<input type="submit" value="Log in">
+				<input type="submit" value="Log In">
 			</div>
 		</form>
+		<br/>
+	<a href="<c:url value='/resetPassword' />">Forgot password?</a>
 	</div>
 
 </body>
