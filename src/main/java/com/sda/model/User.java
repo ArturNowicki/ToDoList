@@ -36,9 +36,9 @@ public class User {
 	@Column(name = "login", nullable = false, unique = true, length = 50)
 	private String login;
 
-	@Size(min = 6, max = 50)
+	@Size(min = 6, max = 100)
 	@NotNull
-	@Column(name = "pass", nullable = false, length = 50)
+	@Column(name = "pass", nullable = false, length = 100)
 	private String password;
 	
 	@Email

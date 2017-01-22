@@ -15,7 +15,7 @@ import com.sda.model.Tag;
 public class TagsServiceImpl implements TagsService {
 
 	@Autowired
-	TagsDao dao;
+	private TagsDao dao;
 	
 	@Override
 	public Tag findById(int id) {

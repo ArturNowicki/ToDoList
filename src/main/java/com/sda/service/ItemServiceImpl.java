@@ -17,10 +17,7 @@ import com.sda.model.Item;
 public class ItemServiceImpl implements ItemService {
 
 	@Autowired
-	UserService userService;
-
-	@Autowired
-	ItemDao dao;
+	private ItemDao dao;
 
 	@Override
 	public Item findById(int id) {

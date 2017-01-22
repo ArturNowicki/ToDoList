@@ -31,7 +31,7 @@
 				<tr>
 					<td><label for="password">Password: </label></td>
 					<td><form:password path="password" id="password"
-							placeholder="Enter Password" maxlength="50"
+							placeholder="Enter Password" maxlength="100"
 							onchange="checkPass(password, confirmPassword)" /></td>
 					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>

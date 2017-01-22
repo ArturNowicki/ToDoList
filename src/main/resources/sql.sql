@@ -7,7 +7,7 @@ drop table if exists User;
 
 CREATE TABLE User(
     id INT(11) NOT NULL auto_increment, 
-    login VARCHAR(50) NOT NULL,
+    login VARCHAR(100) NOT NULL,
     pass VARCHAR(50) NOT NULL,
     email VARCHAR(50),
     type VARCHAR(30) NOT NULL,
@@ -52,9 +52,10 @@ CREATE TABLE ItemTags(
     CONSTRAINT FOREIGN KEY (idTag) REFERENCES Tag (id),
     CONSTRAINT FOREIGN KEY (idItem) REFERENCES Item (id)
     );
-INSERT INTO User (login, pass, email, type) values ('artur', 'artur01', 'anowicki@sda.pl', 'ADMIN');
-INSERT INTO User (login, pass, type) values ('daniel', 'daniel01', 'ADMIN');
-INSERT INTO User (login, pass, email, type) values ('tomasz', 'tomasz01', 'tomek@sda.pl', 'USER');
+
+INSERT INTO User (login, pass, email, type) values ('artur', '$2a$10$fM2geGBoqiRH1SGfEzDkxeZMFjgm90Nss/wmBMkMkxJybDDopClZG', 'anowicki@sda.pl', 'ADMIN');
+INSERT INTO User (login, pass, type) values ('daniel', '$2a$10$HpZf5l7uf0uxkkjdEQkU9.VLV9IebLwwvL9eUrXXIsJwqtEVyQAFy', 'ADMIN');
+INSERT INTO User (login, pass, email, type) values ('tomasz', '$2a$10$QYZMpiYBjTQkV/7C9Xppv.fJefF1uwsDDIJQl0AJGOqziTFEm.3Su', 'tomek@sda.pl', 'USER');
 select * from user;
 
 INSERT INTO Tag (name) VALUES ('difficult'), ('urgent'),  ('returned'), ('tested');
@@ -77,4 +78,3 @@ INSERT INTO ItemTags (idTag, idItem) Values (1,1), (2, 1), (1,2), (3, 2);
 Select i.id, i.title from Item i join ItemTags it on (it.idItem=i.id);
 
 SELECT * FROM USER;
-
