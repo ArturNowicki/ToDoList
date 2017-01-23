@@ -7,8 +7,8 @@ drop table if exists User;
 
 CREATE TABLE User(
     id INT(11) NOT NULL auto_increment, 
-    login VARCHAR(100) NOT NULL,
-    pass VARCHAR(50) NOT NULL,
+    login VARCHAR(50) NOT NULL,
+    pass VARCHAR(100) NOT NULL,
     email VARCHAR(50),
     type VARCHAR(30) NOT NULL,
     PRIMARY KEY (id),
@@ -71,8 +71,9 @@ INSERT INTO Item(title, body, itemType, priority, severity, userId,
     'NEW', curdate(), 1, 10, 0, 12);
 
     
-SELECT i.id, i.title, i.body FROM Item i
-JOin ItemTags it on it.idItem = i.id ;
+SELECT i.id, i.title, i.body, t.name FROM Item i
+JOIN ItemTags it ON it.idItem = i.id
+JOIN Tag t ON it.idTag = t.id;
 
 INSERT INTO ItemTags (idTag, idItem) Values (1,1), (2, 1), (1,2), (3, 2);
 Select i.id, i.title from Item i join ItemTags it on (it.idItem=i.id);
