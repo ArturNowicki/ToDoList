@@ -53,6 +53,19 @@ CREATE TABLE ItemTags(
     CONSTRAINT FOREIGN KEY (idItem) REFERENCES Item (id)
     );
 
+
+drop table if exists PasswordResetToken;
+
+CREATE TABLE PasswordResetToken(
+    id INT(11) NOT NULL auto_increment,
+    token VARCHAR(50) NOT NULL,
+    expiryDate TIMESTAMP NOT NULL,
+    userId INT(11) NOT NULL,
+    primary key (id),
+    CONSTRAINT FOREIGN KEY (userId) REFERENCES User(id)
+);
+
+
 INSERT INTO User (login, pass, email, type) values ('artur', '$2a$10$fM2geGBoqiRH1SGfEzDkxeZMFjgm90Nss/wmBMkMkxJybDDopClZG', 'anowicki@sda.pl', 'ADMIN');
 INSERT INTO User (login, pass, type) values ('daniel', '$2a$10$HpZf5l7uf0uxkkjdEQkU9.VLV9IebLwwvL9eUrXXIsJwqtEVyQAFy', 'ADMIN');
 INSERT INTO User (login, pass, email, type) values ('tomasz', '$2a$10$QYZMpiYBjTQkV/7C9Xppv.fJefF1uwsDDIJQl0AJGOqziTFEm.3Su', 'tomek@sda.pl', 'USER');
@@ -78,4 +91,4 @@ JOIN Tag t ON it.idTag = t.id;
 INSERT INTO ItemTags (idTag, idItem) Values (1,1), (2, 1), (1,2), (3, 2);
 Select i.id, i.title from Item i join ItemTags it on (it.idItem=i.id);
 
-SELECT * FROM USER;
+SELECT * FROM PasswordResetToken;

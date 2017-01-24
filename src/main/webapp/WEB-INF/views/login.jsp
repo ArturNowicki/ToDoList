@@ -13,17 +13,22 @@
 
 <body>
 	<div class="login-box">
-		<c:url var="loginUrl" value="/login" />
-		<form action="${loginUrl}" method="post">
+		<form action="login" method="post">
 			<c:if test="${param.error != null}">
 				<p class="error">Invalid username and password.</p>
 			</c:if>
 			<c:if test="${param.logout != null}">
 				<p>You have been logged out successfully.</p>
 			</c:if>
+			<c:if test="${mailSent != null}">
+				<p>${mailSent}</p>
+			</c:if>
+			<c:if test="${noSuchEmail != null}">
+				<p class="error">${noSuchEmail}</p>
+			</c:if>
 			<div>
-				<label for="login"></label> <input type="text" id="login"
-					name="login" placeholder="Enter Username" required autofocus>
+				<label for="login"></label>
+				<input type="text" id="login" name="login" placeholder="Enter Username" required autofocus>
 			</div>
 			<div>
 				<label for="password"></label> <input type="password" id="password"
@@ -32,11 +37,10 @@
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 
-			<div class="form-actions">
+			<div style="margin:5px">
 				<input type="submit" value="Log In">
 			</div>
 		</form>
-		<br/>
 	<a href="<c:url value='/resetPassword' />">Forgot password?</a>
 	</div>
 

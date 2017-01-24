@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
@@ -12,11 +13,16 @@
 
 <body>
 	<div class="login-box">
-		<form action="resetPass" method="GET">
-			<label>E-Mail</label>
-			<input id="email" name="email" type="text" />
-			<input type="submit" value="Reset" />
+		<form action="resetPass" method="get">
+			<div>
+				<label for="email">E-Mail</label>
+				<input type="text" id="email" name="email" placeholder="Enter email" required autofocus />
+			</div>
+			<div style="margin:5px">
+				<input type="submit" value="Reset" />
+			</div>
 		</form>
+		<a href="<c:url value='/login'/>">Login</a>
 	</div>
 </body>
 

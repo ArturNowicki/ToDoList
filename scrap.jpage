@@ -1,0 +1,4 @@
+Integer[] table = new Integer[3];
+        for (Integer tab : table) {
+            System.out.println(tab);
+        }

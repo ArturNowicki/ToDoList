@@ -5,11 +5,14 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,7 +39,13 @@ public class UserController {
 	@Autowired
 	UserDetailsService customUserDetailsService;
 
-	@Autowired
+//	@Autowired
+//	private JavaMailSender mailSender;
+
+    @Autowired
+    private Environment environment;
+
+    @Autowired
 	PrincipalUtil util;
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -97,7 +106,7 @@ public class UserController {
 		return "redirect:/users";
 	}
 
-	// TODO change password
+	// TODO change/reset password
 
 	@RequestMapping(value = "/delete-{id}-user", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable String id, RedirectAttributes redirectAttributes) {
@@ -116,17 +125,40 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/resetPass", method = RequestMethod.GET)
-	public String generateResetMessage(@RequestParam("email") String email) {
-		Optional<User> maybeUser = userService.findByEmail(email);
+	public String generateResetMessage(final HttpServletRequest request, @RequestParam("email") final String email, RedirectAttributes redirectAttributes) {
+		final Optional<User> maybeUser = userService.findByEmail(email);
 		if (maybeUser.isPresent()) {
-			User user = maybeUser.get();
-			String token = UUID.randomUUID().toString();
+			final User user = maybeUser.get();
+			final String token = UUID.randomUUID().toString();
 			userService.createPasswordResetTokenForUser(user, token);
-//			mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
-//			return new GenericResponse(messages.getMessage("message.resetPasswordEmail", null, request.getLocale()));
-
+//	        mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
+	        SimpleMailMessage message = constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user);
+	        System.out.println("Message" + message.toString());
+	        redirectAttributes.addFlashAttribute("mailSent", messageSource.getMessage("resetPassword", null, Locale.getDefault()));
+		} else {
+			redirectAttributes.addFlashAttribute("noSuchEmail", messageSource.getMessage("noSuchEmail", null, Locale.getDefault()));
 		}
 		return "redirect:/login";
 	}
 
+	
+	
+	private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale, final String token, final User user) {
+        final String url = contextPath + "/changePassword?id=" + user.getId() + "&token=" + token;
+        final String message = messageSource.getMessage("resetPassword", null, Locale.getDefault());
+        return constructEmail("Reset Password", message + " \r\n" + url, user);
+    }
+
+    private SimpleMailMessage constructEmail(String subject, String body, User user) {
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setSubject(subject);
+        email.setText(body);
+        email.setTo(user.getEmail());
+        email.setFrom(environment.getProperty("support.email"));
+        return email;
+    }
+
+    private String getAppUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
 }

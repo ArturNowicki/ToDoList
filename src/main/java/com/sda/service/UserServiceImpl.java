@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sda.dao.PasswordResetTokenDao;
 import com.sda.dao.UserDao;
 import com.sda.model.PasswordResetToken;
 import com.sda.model.User;
@@ -15,6 +16,9 @@ import com.sda.model.User;
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
+	
+	@Autowired
+	private PasswordResetTokenDao passwordResetTokenDao;
 	
 	@Autowired
 	private UserDao dao;
@@ -76,6 +80,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void createPasswordResetTokenForUser(User user, String token) {
 		PasswordResetToken resetToken = new PasswordResetToken(token, user);
+		passwordResetTokenDao.save(resetToken);
 	}
 	
 	
