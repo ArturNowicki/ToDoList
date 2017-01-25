@@ -8,18 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-<title>Reset Password</title>
+<title>Send Reset Token</title>
 </head>
 
 <body>
 	<div class="login-box">
-		<form action="resetPass" method="get">
+		<form action="sendResetToken" method="post">
 			<div>
-				<label for="email">E-Mail</label>
-				<input type="text" id="email" name="email" placeholder="Enter email" required autofocus />
+				<input type="text" id="email" name="email" placeholder="Enter email"
+					required autofocus />
 			</div>
-			<div style="margin:5px">
-				<input type="submit" value="Reset" />
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+
+			<div style="margin: 5px">
+				<input type="submit" value="Send Token" />
 			</div>
 		</form>
 		<a href="<c:url value='/login'/>">Login</a>

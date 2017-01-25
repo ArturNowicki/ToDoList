@@ -18,14 +18,13 @@
 	<div class="element-left">
 		<h2>Edit User</h2>
 
-		<form:form method="POST" modelAttribute="user">
+		<form:form method="POST" modelAttribute="userDto">
 			<form:input type="hidden" path="id" id="id" />
 			<form:input type="hidden" path="login" id="login" />
-			<form:input type="hidden" path="password" id="password" />
 			<table>
 				<tr>
 					<td><label>Login: </label></td>
-					<td><label>${user.login}</label></td>
+					<td><label>${userDto.login}</label></td>
 					<td><form:errors path="login" cssClass="error" /></td>
 				</tr>
 

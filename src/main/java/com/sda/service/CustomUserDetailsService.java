@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sda.enums.UserProfileType;
-import com.sda.model.User;
+import com.sda.persistence.model.User;
 
 
 @Service("customUserDetailsService")

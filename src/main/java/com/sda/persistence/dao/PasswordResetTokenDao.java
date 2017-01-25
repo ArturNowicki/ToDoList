@@ -1,8 +1,8 @@
-package com.sda.dao;
+package com.sda.persistence.dao;
 
 import java.util.Optional;
 
-import com.sda.model.PasswordResetToken;
+import com.sda.persistence.model.PasswordResetToken;
 
 public interface PasswordResetTokenDao {
 

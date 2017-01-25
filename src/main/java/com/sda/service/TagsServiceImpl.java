@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sda.dao.TagsDao;
-import com.sda.model.Tag;
+import com.sda.persistence.dao.TagsDao;
+import com.sda.persistence.model.Tag;
 
 @Service("tagsService")
 @Transactional

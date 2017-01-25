@@ -2,7 +2,7 @@ package com.sda.service;
 
 import java.util.List;
 
-import com.sda.model.Item;
+import com.sda.persistence.model.Item;
 
 public interface ItemService {
 

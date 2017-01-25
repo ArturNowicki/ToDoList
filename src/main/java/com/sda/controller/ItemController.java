@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sda.model.Item;
-import com.sda.model.User;
+import com.sda.persistence.model.Item;
+import com.sda.persistence.model.User;
 import com.sda.service.ItemService;
 import com.sda.service.TagsService;
 import com.sda.service.UserService;
@@ -40,8 +40,8 @@ public class ItemController {
 	PrincipalUtil util;
 
 	@RequestMapping(value = "/item-{id}", method = RequestMethod.GET)
-	public String itemDetails(@PathVariable String id, ModelMap model) {
-		Item item = itemService.findById(Integer.valueOf(id));
+	public String itemDetails(@PathVariable int id, ModelMap model) {
+		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
 		model.addAttribute("loggedUser", util.getPrincipal());
 		return "item";
@@ -74,8 +74,8 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.GET)
-	public String editItem(@PathVariable String id, ModelMap model) {
-		Item item = itemService.findById(Integer.valueOf(id));
+	public String editItem(@PathVariable int id, ModelMap model) {
+		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
 		model.addAttribute("loggedUser", util.getPrincipal());
@@ -98,9 +98,9 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/delete-{id}-item", method = RequestMethod.GET)
-	public String deleteItem(@PathVariable String id, RedirectAttributes redirectAttributes) {
+	public String deleteItem(@PathVariable int id, RedirectAttributes redirectAttributes) {
 		try {
-			itemService.deleteById(Integer.valueOf(id));
+			itemService.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			redirectAttributes.addFlashAttribute("error", "Could not delete item!");
 		}
@@ -108,14 +108,14 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/item-{id}-forward", method = RequestMethod.GET)
-	public String advanceItemState(@PathVariable String id, RedirectAttributes redirectAttributes) {
-		itemService.itemStateForward(Integer.valueOf(id));
+	public String advanceItemState(@PathVariable int id, RedirectAttributes redirectAttributes) {
+		itemService.itemStateForward(id);
 		return "redirect:/dashboard";
 	}
 
 	@RequestMapping(value = "/item-{id}-backward", method = RequestMethod.GET)
-	public String revertItemState(@PathVariable String id, RedirectAttributes redirectAttributes) {
-		itemService.itemStateBack(Integer.valueOf(id));
+	public String revertItemState(@PathVariable int id, RedirectAttributes redirectAttributes) {
+		itemService.itemStateBack(id);
 		return "redirect:/dashboard";
 	}
 

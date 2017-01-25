@@ -8,10 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sda.dao.PasswordResetTokenDao;
-import com.sda.dao.UserDao;
-import com.sda.model.PasswordResetToken;
-import com.sda.model.User;
+import com.sda.dto.UserDto;
+import com.sda.persistence.dao.PasswordResetTokenDao;
+import com.sda.persistence.dao.UserDao;
+import com.sda.persistence.model.PasswordResetToken;
+import com.sda.persistence.model.User;
 
 @Service("userService")
 @Transactional
@@ -31,6 +32,12 @@ public class UserServiceImpl implements UserService {
 		return dao.findById(id);
 	}
 
+	@Override
+	public UserDto getAsDto(int id) {
+		User user = findById(id);
+		return new UserDto(user.getId(), user.getLogin(), user.getEmail(), user.getUserType());
+	}
+	
 	@Override
 	public Optional<User> findByLogin(String login) {
 		return dao.findByLogin(login);
@@ -58,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(UserDto user) {
 		User entity = dao.findById(user.getId());
 		if(null != entity) {
 			entity.setLogin(user.getLogin());

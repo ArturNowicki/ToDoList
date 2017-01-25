@@ -1,4 +1,4 @@
-package com.sda.dao;
+package com.sda.persistence.dao;
 
 import java.util.Optional;
 
@@ -6,7 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.sda.model.PasswordResetToken;
+import com.sda.persistence.model.PasswordResetToken;
 
 @Repository("passwordResetTokenDao")
 public class PasswordResetTokenDaoImpl extends AbstractDao<Integer, PasswordResetToken> implements PasswordResetTokenDao {

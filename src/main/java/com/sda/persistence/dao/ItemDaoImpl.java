@@ -1,4 +1,4 @@
-package com.sda.dao;
+package com.sda.persistence.dao;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 
-import com.sda.model.Item;
+import com.sda.persistence.model.Item;
 
 @Repository("itemDao")
 public class ItemDaoImpl extends AbstractDao<Integer, Item> implements ItemDao {

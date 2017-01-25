@@ -1,4 +1,4 @@
-package com.sda.model;
+package com.sda.persistence.model;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

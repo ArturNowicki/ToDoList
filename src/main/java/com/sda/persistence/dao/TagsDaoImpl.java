@@ -1,4 +1,4 @@
-package com.sda.dao;
+package com.sda.persistence.dao;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.sda.model.Tag;
+import com.sda.persistence.model.Tag;
 
 @Repository("tagsDao")
 public class TagsDaoImpl extends AbstractDao<Integer, Tag> implements TagsDao {

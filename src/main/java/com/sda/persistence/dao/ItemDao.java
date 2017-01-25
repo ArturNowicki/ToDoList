@@ -1,8 +1,8 @@
-package com.sda.dao;
+package com.sda.persistence.dao;
 
 import java.util.List;
 
-import com.sda.model.Item;
+import com.sda.persistence.model.Item;
 
 public interface ItemDao {
 

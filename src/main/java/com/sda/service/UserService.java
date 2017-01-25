@@ -3,7 +3,8 @@ package com.sda.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.sda.model.User;
+import com.sda.dto.UserDto;
+import com.sda.persistence.model.User;
 
 public interface UserService {
 
@@ -15,7 +16,7 @@ public interface UserService {
 
     List<User> listAll();
     
-    void update(User user);
+    void update(UserDto user);
     
     Optional<User> findByLogin(String login);
     
@@ -24,5 +25,7 @@ public interface UserService {
 	boolean isUserUnique(String login);
 
 	void createPasswordResetTokenForUser(User user, String token);
+
+	UserDto getAsDto(int id);
 
 }

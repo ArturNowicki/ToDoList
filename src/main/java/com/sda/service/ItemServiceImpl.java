@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sda.dao.ItemDao;
 import com.sda.enums.State;
-import com.sda.model.Item;
+import com.sda.persistence.dao.ItemDao;
+import com.sda.persistence.model.Item;
 
 @Service("itemService")
 @Transactional

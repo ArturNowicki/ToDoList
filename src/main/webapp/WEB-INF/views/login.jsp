@@ -20,6 +20,9 @@
 			<c:if test="${param.logout != null}">
 				<p>You have been logged out successfully.</p>
 			</c:if>
+			<c:if test="${param.tokenmsg != null}">
+				<p class="error">${param.tokenmsg}</p>
+			</c:if>
 			<c:if test="${mailSent != null}">
 				<p>${mailSent}</p>
 			</c:if>
@@ -27,11 +30,10 @@
 				<p class="error">${noSuchEmail}</p>
 			</c:if>
 			<div>
-				<label for="login"></label>
 				<input type="text" id="login" name="login" placeholder="Enter Username" required autofocus>
 			</div>
 			<div>
-				<label for="password"></label> <input type="password" id="password"
+				<input type="password" id="password"
 					name="password" placeholder="Enter Password" required>
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}"
@@ -41,7 +43,7 @@
 				<input type="submit" value="Log In">
 			</div>
 		</form>
-	<a href="<c:url value='/resetPassword' />">Forgot password?</a>
+	<a href="<c:url value='/sendResetToken' />">Forgot password?</a>
 	</div>
 
 </body>
