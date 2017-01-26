@@ -10,9 +10,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import com.sda.dto.PasswordDto;
 import com.sda.persistence.model.User;
 import com.sda.service.UserSecurityService;
 import com.sda.service.UserService;
+import com.sda.utilities.PrincipalUtil;
 
 @Controller
 public class RegistrationController {
@@ -33,6 +35,12 @@ public class RegistrationController {
 	UserSecurityService userSecurityService;
 	
 	@Autowired
+	PrincipalUtil util;	
+
+    @Autowired
+    private JavaMailSender mailSender;
+    
+    @Autowired
 	MessageSource messageSource;
 
 	@RequestMapping(value = "/sendResetToken", method = RequestMethod.GET)
@@ -48,10 +56,9 @@ public class RegistrationController {
 			final User user = maybeUser.get();
 			final String token = UUID.randomUUID().toString();
 			userService.createPasswordResetTokenForUser(user, token);
-			// mailSender.send(constructResetTokenEmail(getAppUrl(request),
-			// request.getLocale(), token, user));
 			SimpleMailMessage message = constructResetTokenEmail(getAppUrl(request), Locale.getDefault(), token, user);
-			System.out.println("Message: " + message.toString());
+//			mailSender.send(message);
+			System.out.println("TOKEN: " + message);
 			redirectAttributes.addFlashAttribute("mailSent",
 					messageSource.getMessage("resetPassword", null, Locale.getDefault()));
 		} else {
@@ -73,17 +80,17 @@ public class RegistrationController {
 		return "updatePassword";
 	}
 
-    @RequestMapping(value = "/user/changePassword", method = RequestMethod.POST)
-    public String savePassword(@Valid PasswordDto passwordDto) {
-        final User user = (User) SecurityContextHolder.getContext()
-            .getAuthentication()
-            .getPrincipal();
-        System.out.println("!!!!!!!Reset password: " + user + passwordDto.getPassword());
-//        userService.changeUserPassword(user, passwordDto.getNewPassword());
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String savePassword(@Valid PasswordDto passwordDto, BindingResult result, ModelMap model) {
+    	if(result.hasErrors()) {
+    		model.addAttribute("passDto", passwordDto);
+    		return "updatePassword";
+    	}
+        final User user = (User) util.getPrincipal();
+        userService.changePassword(user, passwordDto.getPassword());
         return "login";
     }
 
-	
 	private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale,
 			final String token, final User user) {
 		final String url = contextPath + "/changePassword?id=" + user.getId() + "&token=" + token;
@@ -96,7 +103,7 @@ public class RegistrationController {
 		email.setSubject(subject);
 		email.setText(body);
 		email.setTo(user.getEmail());
-		email.setFrom("ToDoList support");
+		email.setFrom("support@todolist.com");
 		return email;
 	}
 

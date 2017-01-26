@@ -1,13 +1,11 @@
 package com.sda.service;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,9 +32,8 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 			return "Expired token";
 		}
 		final User user = maybePassToken.get().getUser();
-		final Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+		final Authentication auth = new UsernamePasswordAuthenticationToken(user, null,null);
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		System.out.println("AUTHENTICATION: " + auth);
 		return null;
 	}
 

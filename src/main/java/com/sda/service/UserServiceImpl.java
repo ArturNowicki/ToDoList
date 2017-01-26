@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void save(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setPassword(encodePassword(user.getPassword()));
 		dao.add(user);
 	}
 
@@ -75,6 +75,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void changePassword(User user, String password) {
+		User entity = dao.findById(user.getId());
+		if(null != entity) {
+			entity.setPassword(encodePassword(password));
+		}
+	}
+
+	@Override
 	public boolean isUserUnique(String login) {
 		Optional<User> maybeUser = dao.findByLogin(login);
 		if(maybeUser.isPresent()) {
@@ -90,6 +98,8 @@ public class UserServiceImpl implements UserService {
 		passwordResetTokenDao.save(resetToken);
 	}
 	
-	
+	private String encodePassword(String password) {
+		return passwordEncoder.encode(password);
+	}
 
 }

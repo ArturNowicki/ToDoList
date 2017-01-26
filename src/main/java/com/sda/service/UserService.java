@@ -18,6 +18,8 @@ public interface UserService {
     
     void update(UserDto user);
     
+    void changePassword(User user, String password);
+    
     Optional<User> findByLogin(String login);
     
 	Optional<User> findByEmail(String email);

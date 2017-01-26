@@ -20,6 +20,7 @@ import com.sda.persistence.model.User;
 import com.sda.service.ItemService;
 import com.sda.service.TagsService;
 import com.sda.service.UserService;
+import com.sda.utilities.PrincipalUtil;
 
 @Controller
 public class ItemController {
@@ -43,7 +44,7 @@ public class ItemController {
 	public String itemDetails(@PathVariable int id, ModelMap model) {
 		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "item";
 	}
 
@@ -52,7 +53,7 @@ public class ItemController {
 		Item item = new Item();
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "additem";
 	}
 
@@ -66,7 +67,7 @@ public class ItemController {
 		}
 		Optional<User> user = userService.findByLogin(item.getAssignedUser().getLogin());
 		item.setAssignedUser(user.get());
-		user = userService.findByLogin(util.getPrincipal());
+		user = userService.findByLogin(util.getPrincipalName());
 		item.setCreatedBy(user.get());
 		itemService.save(item);
 		redirectAttributes.addFlashAttribute("message", "Item " + item.getTitle() + " added successfully");
@@ -78,7 +79,7 @@ public class ItemController {
 		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "edititem";
 	}
 

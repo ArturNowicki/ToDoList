@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sda.dto.UserDto;
 import com.sda.persistence.model.User;
 import com.sda.service.UserService;
+import com.sda.utilities.PrincipalUtil;
 
 @Controller
 public class UserController {
@@ -40,7 +41,7 @@ public class UserController {
 	public String listUsers(ModelMap model) {
 		List<User> users = userService.listAll();
 		model.addAttribute("users", users);
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "allusers";
 	}
 
@@ -48,7 +49,7 @@ public class UserController {
 	public String addUser(ModelMap model) {
 		User user = new User();
 		model.addAttribute("user", user);
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "adduser";
 	}
 
@@ -72,7 +73,7 @@ public class UserController {
 	public String editUser(@PathVariable int id, ModelMap model) {
 		UserDto userDto = userService.getAsDto(id);
 		model.addAttribute("userDto", userDto);
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "edituser";
 	}
 
@@ -94,8 +95,6 @@ public class UserController {
 		redirectAttributes.addFlashAttribute("message", "User " + userDto.getLogin() + " updated successfully");
 		return "redirect:/users";
 	}
-
-	// TODO change/reset password
 
 	@RequestMapping(value = "/delete-{id}-user", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {

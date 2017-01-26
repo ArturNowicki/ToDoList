@@ -18,13 +18,13 @@
 		<form:form method="POST" modelAttribute="passDto">
 			<div>
 				<form:password path="password" id="password"
-					placeholder="Enter Password" maxlength="100"
+					placeholder="Enter Password" maxlength="100" required="required"
 					onchange="checkPass(password, confirmPassword)" />
 				<form:errors path="password" cssClass="error" />
 			</div>
 			<div>
 				<input type="password" id="confirmPassword"
-					placeholder="Confirm Password" maxlength="50"
+					placeholder="Confirm Password" maxlength="50" required
 					onchange="checkPass(password, confirmPassword)" />
 				<form:errors path="password" cssClass="error" />
 			</div>

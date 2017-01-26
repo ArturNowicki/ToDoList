@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sda.persistence.model.Item;
 import com.sda.service.ItemService;
+import com.sda.utilities.PrincipalUtil;
 
 @Controller
 public class AppController {
@@ -25,13 +26,12 @@ public class AppController {
 
 	@Autowired
 	PrincipalUtil util;	
-	// DASHBOARD
 
 	@RequestMapping(value = {"/", "/dashboard"}, method = RequestMethod.GET)
 	public String listDashboard(ModelMap model) {
 		List<Item> items = itemService.listAll();
 		model.addAttribute("item", items);
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "dashboard";
 	}
 
@@ -51,7 +51,7 @@ public class AppController {
 
 	@RequestMapping(value = "/access_denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
-		model.addAttribute("loggedUser", util.getPrincipal());
+		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "accessDenied";
 	}
 
