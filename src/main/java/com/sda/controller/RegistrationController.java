@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,14 +34,14 @@ public class RegistrationController {
 
 	@Autowired
 	UserSecurityService userSecurityService;
-	
-	@Autowired
-	PrincipalUtil util;	
 
-    @Autowired
-    private JavaMailSender mailSender;
-    
-    @Autowired
+	@Autowired
+	PrincipalUtil util;
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	@Autowired
 	MessageSource messageSource;
 
 	@RequestMapping(value = "/sendResetToken", method = RequestMethod.GET)
@@ -57,7 +58,7 @@ public class RegistrationController {
 			final String token = UUID.randomUUID().toString();
 			userService.createPasswordResetTokenForUser(user, token);
 			SimpleMailMessage message = constructResetTokenEmail(getAppUrl(request), Locale.getDefault(), token, user);
-//			mailSender.send(message);
+			// mailSender.send(message);
 			System.out.println("TOKEN: " + message);
 			redirectAttributes.addFlashAttribute("mailSent",
 					messageSource.getMessage("resetPassword", null, Locale.getDefault()));
@@ -72,7 +73,7 @@ public class RegistrationController {
 	public String changePassword(@RequestParam("id") final int userId, @RequestParam("token") final String token,
 			ModelMap model) {
 		final String result = userSecurityService.validatePasswordResetToken(userId, token);
-		if(null != result) {
+		if (null != result) {
 			model.addAttribute("tokenmsg", result);
 			return "redirect:/login";
 		}
@@ -80,16 +81,23 @@ public class RegistrationController {
 		return "updatePassword";
 	}
 
-    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public String savePassword(@Valid PasswordDto passwordDto, BindingResult result, ModelMap model) {
-    	if(result.hasErrors()) {
-    		model.addAttribute("passDto", passwordDto);
-    		return "updatePassword";
-    	}
-        final User user = (User) util.getPrincipal();
-        userService.changePassword(user, passwordDto.getPassword());
-        return "login";
-    }
+	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+	public String savePassword(@Valid PasswordDto passwordDto, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			model.addAttribute("passDto", passwordDto);
+			return "updatePassword";
+		}
+		if (!userService.isPasswordMatching(passwordDto.getPassword(), passwordDto.getConfirmPassword())) {
+			FieldError passwordError = new FieldError("passwordDto", "password", messageSource
+					.getMessage("passwordsDontMatch", new String[] { passwordDto.getPassword() }, Locale.getDefault()));
+			result.addError(passwordError);
+			model.addAttribute("passDto", passwordDto);
+			return "updatePassword";
+		}
+		final User user = (User) util.getPrincipal();
+		userService.changePassword(user, passwordDto.getPassword());
+		return "login";
+	}
 
 	private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale,
 			final String token, final User user) {

@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sda.dto.UserDto;
+import com.sda.dto.EditUserDto;
 import com.sda.persistence.dao.PasswordResetTokenDao;
 import com.sda.persistence.dao.UserDao;
 import com.sda.persistence.model.PasswordResetToken;
@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto getAsDto(int id) {
+	public EditUserDto getAsDto(int id) {
 		User user = findById(id);
-		return new UserDto(user.getId(), user.getLogin(), user.getEmail(), user.getUserType());
+		return new EditUserDto(user.getId(), user.getLogin(), user.getEmail(), user.getUserType());
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(UserDto user) {
+	public void update(EditUserDto user) {
 		User entity = dao.findById(user.getId());
 		if(null != entity) {
 			entity.setLogin(user.getLogin());
@@ -90,6 +90,11 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return true;
 		}
+	}
+	
+	@Override
+	public boolean isPasswordMatching(String password, String confirmPassowrd) {
+		return password == confirmPassowrd ? true : false;
 	}
 
 	@Override

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sda.dto.UserDto;
+import com.sda.dto.EditUserDto;
 import com.sda.persistence.model.User;
 import com.sda.service.UserService;
 import com.sda.utilities.PrincipalUtil;
@@ -31,10 +31,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-//	@Autowired
-//	private JavaMailSender mailSender;
-
-    @Autowired
+	@Autowired
 	PrincipalUtil util;
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -47,8 +44,7 @@ public class UserController {
 
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
-		User user = new User();
-		model.addAttribute("user", user);
+		model.addAttribute("user", new User());
 		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "adduser";
 	}
@@ -71,14 +67,14 @@ public class UserController {
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.GET)
 	public String editUser(@PathVariable int id, ModelMap model) {
-		UserDto userDto = userService.getAsDto(id);
+		EditUserDto userDto = userService.getAsDto(id);
 		model.addAttribute("userDto", userDto);
 		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "edituser";
 	}
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.POST)
-	public String updateUser(@PathVariable int id, @Valid UserDto userDto, BindingResult result,
+	public String updateUser(@PathVariable int id, @Valid EditUserDto userDto, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "edituser";
@@ -90,7 +86,7 @@ public class UserController {
 			result.addError(loginError);
 			return "edituser";
 		}
-		
+
 		userService.update(userDto);
 		redirectAttributes.addFlashAttribute("message", "User " + userDto.getLogin() + " updated successfully");
 		return "redirect:/users";

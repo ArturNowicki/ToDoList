@@ -15,18 +15,22 @@
 
 <body>
 	<div class="login-box">
+		<c:if test="${error != null}">
+			<p class="error">${error}</p>
+		</c:if>
+
 		<form:form method="POST" modelAttribute="passDto">
 			<div>
 				<form:password path="password" id="password"
-					placeholder="Enter Password" maxlength="100" required="required"
-					onchange="checkPass(password, confirmPassword)" />
+					placeholder="Enter Password" maxlength="100" 
+					onchange="" />
 				<form:errors path="password" cssClass="error" />
 			</div>
 			<div>
-				<input type="password" id="confirmPassword"
-					placeholder="Confirm Password" maxlength="50" required
-					onchange="checkPass(password, confirmPassword)" />
-				<form:errors path="password" cssClass="error" />
+				<form:password path="confirmPassword" id="confirmPassword"
+					placeholder="Confirm Password" maxlength="100" 
+					onchange="" />
+				<form:errors path="confirmPassword" cssClass="error" />
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />

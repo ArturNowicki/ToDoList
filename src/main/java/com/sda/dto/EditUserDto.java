@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Email;
 import com.sda.enums.UserProfileType;
 import com.sda.persistence.model.UserName;
 
-public class UserDto {
+public class EditUserDto {
 
 	@NotNull
 	private int id;
@@ -23,10 +23,10 @@ public class UserDto {
 
 	private UserProfileType userType;
 
-	public UserDto() {
+	public EditUserDto() {
 	}
 
-	public UserDto(int id, String login, String email, UserProfileType userType) {
+	public EditUserDto(int id, String login, String email, UserProfileType userType) {
 		this.id = id;
 		this.login = login;
 		this.email = email;

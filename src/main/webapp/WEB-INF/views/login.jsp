@@ -13,37 +13,38 @@
 
 <body>
 	<div class="login-box">
+		<c:if test="${param.error != null}">
+			<p class="error">Invalid username and password.</p>
+		</c:if>
+		<c:if test="${param.logout != null}">
+			<p>You have been logged out successfully.</p>
+		</c:if>
+		<c:if test="${param.tokenmsg != null}">
+			<p class="error">${param.tokenmsg}</p>
+		</c:if>
+		<c:if test="${mailSent != null}">
+			<p>${mailSent}</p>
+		</c:if>
+		<c:if test="${noSuchEmail != null}">
+			<p class="error">${noSuchEmail}</p>
+		</c:if>
 		<form action="login" method="post">
-			<c:if test="${param.error != null}">
-				<p class="error">Invalid username and password.</p>
-			</c:if>
-			<c:if test="${param.logout != null}">
-				<p>You have been logged out successfully.</p>
-			</c:if>
-			<c:if test="${param.tokenmsg != null}">
-				<p class="error">${param.tokenmsg}</p>
-			</c:if>
-			<c:if test="${mailSent != null}">
-				<p>${mailSent}</p>
-			</c:if>
-			<c:if test="${noSuchEmail != null}">
-				<p class="error">${noSuchEmail}</p>
-			</c:if>
 			<div>
-				<input type="text" id="login" name="login" placeholder="Enter Username" required autofocus>
+				<input type="text" id="login" name="login"
+					placeholder="Enter Username" required autofocus>
 			</div>
 			<div>
-				<input type="password" id="password"
-					name="password" placeholder="Enter Password" required>
+				<input type="password" id="password" name="password"
+					placeholder="Enter Password" required>
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 
-			<div style="margin:5px">
+			<div style="margin: 5px">
 				<input type="submit" value="Log In">
 			</div>
 		</form>
-	<a href="<c:url value='/sendResetToken' />">Forgot password?</a>
+		<a href="<c:url value='/sendResetToken' />">Forgot password?</a>
 	</div>
 
 </body>
