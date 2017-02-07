@@ -62,6 +62,13 @@ public class User {
 		this.login = login.toLowerCase();
 	}
 
+	public User(int id, String login, String email, UserProfileType userType) {
+		this.id = id;
+		this.login = login.toLowerCase();
+		this.email = email;
+		this.userType = userType;
+	}
+
 //	getters&setters
 	
 	public int getId() {

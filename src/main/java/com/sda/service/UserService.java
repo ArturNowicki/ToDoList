@@ -16,7 +16,7 @@ public interface UserService {
 
     List<User> listAll();
     
-    void update(EditUserDto user);
+    void update(User user);
     
     void changePassword(User user, String password);
     
@@ -30,6 +30,6 @@ public interface UserService {
 
 	void createPasswordResetTokenForUser(User user, String token);
 
-	EditUserDto getAsDto(int id);
+	EditUserDto getAsEditUserDto(int id);
 
 }

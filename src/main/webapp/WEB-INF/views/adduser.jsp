@@ -19,7 +19,7 @@
 	<div class="element-left">
 		<h2>User Form</h2>
 
-		<form:form method="POST" modelAttribute="user">
+		<form:form method="POST" modelAttribute="newUserDto">
 			<table>
 				<tr>
 					<td><label for="login">Login: </label></td>
@@ -38,10 +38,10 @@
 
 				<tr>
 					<td><label for="confirmPassword">Confirm Password: </label></td>
-					<td><input type="password" id="confirmPassword"
-						placeholder="Confirm Password" maxlength="50"
-						onchange="checkPass(password, confirmPassword)" /></td>
-					<td><form:errors path="password" cssClass="error" /></td>
+					<td><form:password path="confirmPassword" id="confirmPassword"
+							placeholder="Confirm Password" maxlength="100"
+							onchange="checkPass(password, confirmPassword)" /></td>
+					<td><form:errors path="confirmPassword" cssClass="error" /></td>
 				</tr>
 
 				<tr>

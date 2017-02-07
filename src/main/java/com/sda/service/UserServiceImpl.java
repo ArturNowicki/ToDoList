@@ -17,13 +17,13 @@ import com.sda.persistence.model.User;
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private PasswordResetTokenDao passwordResetTokenDao;
-	
+
 	@Autowired
 	private UserDao dao;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public EditUserDto getAsDto(int id) {
+	public EditUserDto getAsEditUserDto(int id) {
 		User user = findById(id);
 		return new EditUserDto(user.getId(), user.getLogin(), user.getEmail(), user.getUserType());
 	}
-	
+
 	@Override
 	public Optional<User> findByLogin(String login) {
 		return dao.findByLogin(login);
@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(EditUserDto user) {
+	public void update(User user) {
 		User entity = dao.findById(user.getId());
-		if(null != entity) {
+		if (null != entity) {
 			entity.setLogin(user.getLogin());
 			entity.setEmail(user.getEmail());
 			entity.setUserType(user.getUserType());
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void changePassword(User user, String password) {
 		User entity = dao.findById(user.getId());
-		if(null != entity) {
+		if (null != entity) {
 			entity.setPassword(encodePassword(password));
 		}
 	}
@@ -85,13 +85,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean isUserUnique(String login) {
 		Optional<User> maybeUser = dao.findByLogin(login);
-		if(maybeUser.isPresent()) {
+		if (maybeUser.isPresent()) {
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
+
 	@Override
 	public boolean isPasswordMatching(String password, String confirmPassowrd) {
 		return password.equals(confirmPassowrd) ? true : false;
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 		PasswordResetToken resetToken = new PasswordResetToken(token, user);
 		passwordResetTokenDao.save(resetToken);
 	}
-	
+
 	private String encodePassword(String password) {
 		return passwordEncoder.encode(password);
 	}
