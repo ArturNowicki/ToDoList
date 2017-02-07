@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean isPasswordMatching(String password, String confirmPassowrd) {
-		return password == confirmPassowrd ? true : false;
+		return password.equals(confirmPassowrd) ? true : false;
 	}
 
 	@Override

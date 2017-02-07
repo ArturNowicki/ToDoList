@@ -77,26 +77,29 @@ public class RegistrationController {
 			model.addAttribute("tokenmsg", result);
 			return "redirect:/login";
 		}
-		model.addAttribute("passDto", new PasswordDto());
+		model.addAttribute("passwordDto", new PasswordDto());
 		return "updatePassword";
 	}
 
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-	public String savePassword(@Valid PasswordDto passwordDto, BindingResult result, ModelMap model) {
+	public String savePassword(@Valid PasswordDto passwordDto, BindingResult result, ModelMap model,
+			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			model.addAttribute("passDto", passwordDto);
+			model.addAttribute("passwordDto", passwordDto);
 			return "updatePassword";
 		}
 		if (!userService.isPasswordMatching(passwordDto.getPassword(), passwordDto.getConfirmPassword())) {
 			FieldError passwordError = new FieldError("passwordDto", "password", messageSource
-					.getMessage("passwordsDontMatch", new String[] { passwordDto.getPassword() }, Locale.getDefault()));
+					.getMessage("passwords.not.match", null, Locale.getDefault()));
 			result.addError(passwordError);
-			model.addAttribute("passDto", passwordDto);
+			model.addAttribute("passwordDto", passwordDto);
 			return "updatePassword";
 		}
 		final User user = (User) util.getPrincipal();
 		userService.changePassword(user, passwordDto.getPassword());
-		return "login";
+		redirectAttributes.addFlashAttribute("passwordUpdated",
+				messageSource.getMessage("passwordUpdated", null, Locale.getDefault()));
+		return "redirect:/login";
 	}
 
 	private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale,

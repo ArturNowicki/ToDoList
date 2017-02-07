@@ -29,5 +29,10 @@ public class PasswordDto {
 		this.confirmPassword = confirmPassword;
 	}
 
+	@Override
+	public String toString() {
+		return "PasswordDto [password=" + password + ", confirmPassword=" + confirmPassword + "]";
+	}
+
 
 }

@@ -28,6 +28,9 @@
 		<c:if test="${noSuchEmail != null}">
 			<p class="error">${noSuchEmail}</p>
 		</c:if>
+		<c:if test="${passwordUpdated!= null}">
+			<p>${passwordUpdated}</p>
+		</c:if>
 		<form action="login" method="post">
 			<div>
 				<input type="text" id="login" name="login"

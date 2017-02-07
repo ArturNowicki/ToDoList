@@ -19,17 +19,17 @@
 			<p class="error">${error}</p>
 		</c:if>
 
-		<form:form method="POST" modelAttribute="passDto">
+		<form:form method="POST" modelAttribute="passwordDto">
 			<div>
 				<form:password path="password" id="password"
 					placeholder="Enter Password" maxlength="100" 
-					onchange="" />
+					onchange="checkPass(password, confirmPassword)" autofocus="autofocus" />
 				<form:errors path="password" cssClass="error" />
 			</div>
 			<div>
 				<form:password path="confirmPassword" id="confirmPassword"
 					placeholder="Confirm Password" maxlength="100" 
-					onchange="" />
+					onchange="checkPass(password, confirmPassword)" />
 				<form:errors path="confirmPassword" cssClass="error" />
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}"
