@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="item-tile">
-	<a href="<c:url value='/item-${item.id}' />" id="item-link"> ID:
+	<a href="<c:url value='/item-${item.id}' />" id="item-link">
 		Title: ${item.title}<br />
 		Owner: ${item.assignedUser.login}<br />
 		O: ${item.originalEstimate} C: ${item.completedHours} R: ${item.remainingHours}
