@@ -50,14 +50,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			return "adduser";
-		}
+	public String saveUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes, ModelMap model) {
 		if (!userService.isUserUnique(user.getLogin())) {
 			FieldError loginError = new FieldError("user", "login", messageSource.getMessage("non.unique.login",
 					new String[] { user.getLogin() }, Locale.getDefault()));
 			result.addError(loginError);
+		}
+		if (result.hasErrors()) {
+			model.addAttribute("loggedUser", util.getPrincipalName());
 			return "adduser";
 		}
 		userService.save(user);
@@ -67,26 +67,19 @@ public class UserController {
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.GET)
 	public String editUser(@PathVariable int id, ModelMap model) {
-		EditUserDto userDto = userService.getAsDto(id);
-		model.addAttribute("userDto", userDto);
+		model.addAttribute("userDto", userService.getAsDto(id));
 		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "edituser";
 	}
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.POST)
 	public String updateUser(@PathVariable int id, @Valid EditUserDto userDto, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, ModelMap model) {
 		if (result.hasErrors()) {
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("loggedUser", util.getPrincipalName());
 			return "edituser";
 		}
-		User entity = userService.findById(id);
-		if (!userService.isUserUnique(userDto.getLogin()) && !userDto.getLogin().equals(entity.getLogin())) {
-			FieldError loginError = new FieldError("user", "login", messageSource.getMessage("non.unique.login",
-					new String[] { userDto.getLogin() }, Locale.getDefault()));
-			result.addError(loginError);
-			return "edituser";
-		}
-
 		userService.update(userDto);
 		redirectAttributes.addFlashAttribute("message", "User " + userDto.getLogin() + " updated successfully");
 		return "redirect:/users";

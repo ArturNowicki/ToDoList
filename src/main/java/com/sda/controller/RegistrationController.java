@@ -82,17 +82,14 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-	public String savePassword(@Valid PasswordDto passwordDto, BindingResult result, ModelMap model,
+	public String savePassword(@Valid PasswordDto passwordDto, BindingResult result,
 			RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			model.addAttribute("passwordDto", passwordDto);
-			return "updatePassword";
-		}
 		if (!userService.isPasswordMatching(passwordDto.getPassword(), passwordDto.getConfirmPassword())) {
 			FieldError passwordError = new FieldError("passwordDto", "password", messageSource
 					.getMessage("passwords.not.match", null, Locale.getDefault()));
 			result.addError(passwordError);
-			model.addAttribute("passwordDto", passwordDto);
+		}
+		if (result.hasErrors()) {
 			return "updatePassword";
 		}
 		final User user = (User) util.getPrincipal();

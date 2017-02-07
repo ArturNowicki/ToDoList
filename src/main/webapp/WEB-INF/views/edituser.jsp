@@ -25,12 +25,12 @@
 				<tr>
 					<td><label>Login: </label></td>
 					<td><label>${userDto.login}</label></td>
-					<td><form:errors path="login" cssClass="error" /></td>
 				</tr>
 
 				<tr>
 					<td><label for="email">E-Mail: </label></td>
-					<td><form:input path="email" id="email" autofocus="autofocus" maxlength="50"/></td>
+					<td><form:input path="email" id="email" autofocus="autofocus"
+							maxlength="50" /></td>
 					<td><form:errors path="email" cssClass="error" /></td>
 				</tr>
 
@@ -39,7 +39,6 @@
 					<td><form:select path="userType" id="type">
 							<form:options />
 						</form:select></td>
-					<td><form:errors path="userType" cssClass="error" /></td>
 				</tr>
 
 				<tr>
