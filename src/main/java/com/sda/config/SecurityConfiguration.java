@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
