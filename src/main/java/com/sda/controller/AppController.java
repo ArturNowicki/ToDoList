@@ -22,10 +22,10 @@ import com.sda.utilities.PrincipalUtil;
 public class AppController {
 
 	@Autowired
-	ItemService itemService;
+	private ItemService itemService;
 
 	@Autowired
-	PrincipalUtil util;	
+	private PrincipalUtil util;	
 
 	@RequestMapping(value = {"/", "/dashboard"}, method = RequestMethod.GET)
 	public String listDashboard(ModelMap model) {
@@ -41,8 +41,8 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	public String logoutPage(final HttpServletRequest request, final HttpServletResponse response) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}

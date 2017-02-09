@@ -19,11 +19,11 @@ import com.sda.persistence.model.User;
 public class UserSecurityServiceImpl implements UserSecurityService {
 
 	@Autowired
-	PasswordResetTokenDao passwordResetTokenDao;
+	private PasswordResetTokenDao passwordResetTokenDao;
 
 	@Override
-	public String validatePasswordResetToken(int id, String token) {
-		Optional<PasswordResetToken> maybePassToken = passwordResetTokenDao.findByToken(token);
+	public String validatePasswordResetToken(final int id, final String token) {
+		final Optional<PasswordResetToken> maybePassToken = passwordResetTokenDao.findByToken(token);
 		if (!maybePassToken.isPresent() || maybePassToken.get().getUser().getId() != id) {
 			return "Invalid token";
 		}

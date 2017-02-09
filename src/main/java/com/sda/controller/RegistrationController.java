@@ -30,19 +30,19 @@ import com.sda.utilities.PrincipalUtil;
 public class RegistrationController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	UserSecurityService userSecurityService;
+	private UserSecurityService userSecurityService;
 
 	@Autowired
-	PrincipalUtil util;
+	private PrincipalUtil util;
 
 	@Autowired
 	private JavaMailSender mailSender;
 
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 
 	@RequestMapping(value = "/sendResetToken", method = RequestMethod.GET)
 	public String resendPassword() {
@@ -82,7 +82,7 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-	public String savePassword(@Valid PasswordDto passwordDto, BindingResult result,
+	public String savePassword(@Valid final PasswordDto passwordDto, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (!userService.isPasswordMatching(passwordDto.getPassword(), passwordDto.getConfirmPassword())) {
 			FieldError passwordError = new FieldError("passwordDto", "password", messageSource
@@ -106,7 +106,7 @@ public class RegistrationController {
 		return constructEmail("Reset Password", message + " \r\n" + url, user);
 	}
 
-	private SimpleMailMessage constructEmail(String subject, String body, User user) {
+	private SimpleMailMessage constructEmail(final String subject, final String body, final User user) {
 		final SimpleMailMessage email = new SimpleMailMessage();
 		email.setSubject(subject);
 		email.setText(body);
@@ -115,7 +115,7 @@ public class RegistrationController {
 		return email;
 	}
 
-	private String getAppUrl(HttpServletRequest request) {
+	private String getAppUrl(final HttpServletRequest request) {
 		return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 	}
 

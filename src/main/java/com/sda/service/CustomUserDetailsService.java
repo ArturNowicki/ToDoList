@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
 		Optional<User> maybeUser = userService.findByLogin(login);
 		if (!maybeUser.isPresent()) {
 			throw new UsernameNotFoundException("Username not found");
@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 				true, true, true, true, getGrantedAuthorities(user));
 	}
 
-	private List<GrantedAuthority> getGrantedAuthorities(User user) {
+	private List<GrantedAuthority> getGrantedAuthorities(final User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		if (user.getUserType().equals(UserProfileType.USER)) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

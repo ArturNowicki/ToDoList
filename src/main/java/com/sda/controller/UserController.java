@@ -27,13 +27,13 @@ import com.sda.utilities.PrincipalUtil;
 public class UserController {
 
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	PrincipalUtil util;
+	private PrincipalUtil util;
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
@@ -50,7 +50,7 @@ public class UserController {
 		return "adduser";
 	}
 	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
-	public String saveUser(@Valid NewUserDto newUserDto, BindingResult result, RedirectAttributes redirectAttributes, ModelMap model) {
+	public String saveUser(@Valid final NewUserDto newUserDto, BindingResult result, RedirectAttributes redirectAttributes, ModelMap model) {
 		if (!userService.isUserUnique(newUserDto.getLogin())) {
 			FieldError loginError = new FieldError("newUserDto", "login", messageSource.getMessage("non.unique.login",
 					new String[] { newUserDto.getLogin() }, Locale.getDefault()));
@@ -65,33 +65,33 @@ public class UserController {
 			model.addAttribute("loggedUser", util.getPrincipalName());
 			return "adduser";
 		}
-		userService.save(newUserDtoToUser(newUserDto));
+		userService.save(newUserDtoAsUser(newUserDto));
 		redirectAttributes.addFlashAttribute("message", "User " + newUserDto.getLogin() + " added successfully");
 		return "redirect:/users";
 	}
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.GET)
-	public String editUser(@PathVariable int id, ModelMap model) {
+	public String editUser(@PathVariable final int id, ModelMap model) {
 		model.addAttribute("editUserDto", userService.getAsEditUserDto(id));
 		model.addAttribute("loggedUser", util.getPrincipalName());
 		return "edituser";
 	}
 
 	@RequestMapping(value = "/edit-{id}-user", method = RequestMethod.POST)
-	public String updateUser(@PathVariable int id, @Valid EditUserDto editUserDto, BindingResult result,
+	public String updateUser(@PathVariable final int id, @Valid final EditUserDto editUserDto, BindingResult result,
 			RedirectAttributes redirectAttributes, ModelMap model) {
 		if (result.hasErrors()) {
 			model.addAttribute("editUserDto", editUserDto);
 			model.addAttribute("loggedUser", util.getPrincipalName());
 			return "edituser";
 		}
-		userService.update(editUserDtoToUser(editUserDto));
+		userService.update(editUserDtoAsUser(editUserDto));
 		redirectAttributes.addFlashAttribute("message", "User " + editUserDto.getLogin() + " updated successfully");
 		return "redirect:/users";
 	}
 
 	@RequestMapping(value = "/delete-{id}-user", method = RequestMethod.GET)
-	public String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
+	public String deleteUser(@PathVariable final int id, RedirectAttributes redirectAttributes) {
 		try {		userService.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			redirectAttributes.addFlashAttribute("error", "Could not delete user!");
@@ -100,10 +100,10 @@ public class UserController {
 	}
 
 	
-	private User editUserDtoToUser(EditUserDto editUserDto) {
+	private User editUserDtoAsUser(final EditUserDto editUserDto) {
 		return new User(editUserDto.getId(), editUserDto.getLogin(), editUserDto.getEmail(), editUserDto.getUserType());
 	}
-	private User newUserDtoToUser(NewUserDto newUserDto) {
+	private User newUserDtoAsUser(final NewUserDto newUserDto) {
 		User user = new User(newUserDto.getLogin());
 		user.setEmail(newUserDto.getEmail());
 		user.setPassword(newUserDto.getPassword());

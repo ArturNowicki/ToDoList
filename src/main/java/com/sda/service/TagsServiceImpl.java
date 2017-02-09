@@ -18,22 +18,22 @@ public class TagsServiceImpl implements TagsService {
 	private TagsDao dao;
 	
 	@Override
-	public Tag findById(int id) {
+	public Tag findById(final int id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public Optional<Tag> findByName(String name) {
+	public Optional<Tag> findByName(final String name) {
 		return dao.findByName(name);
 	}
 
 	@Override
-	public void save(Tag tag) {
+	public void save(final Tag tag) {
 		dao.add(tag);
 	}
 
 	@Override
-	public void deleteById(int id) {
+	public void deleteById(final int id) {
 		dao.deleteById(id);
 	}
 
@@ -43,7 +43,7 @@ public class TagsServiceImpl implements TagsService {
 	}
 
 	@Override
-	public boolean isTagUnique(String name) {
+	public boolean isTagUnique(final String name) {
 		Optional<Tag> maybeTag = dao.findByName(name);
 		if(maybeTag.isPresent()) {
 			return false;

@@ -26,22 +26,22 @@ import com.sda.utilities.PrincipalUtil;
 public class ItemController {
 
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 
 	@Autowired
-	ItemService itemService;
+	private ItemService itemService;
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	TagsService tagsService;
+	private TagsService tagsService;
 
 	@Autowired
-	PrincipalUtil util;
+	private PrincipalUtil util;
 
 	@RequestMapping(value = "/item-{id}", method = RequestMethod.GET)
-	public String itemDetails(@PathVariable int id, ModelMap model) {
+	public String itemDetails(@PathVariable final int id, ModelMap model) {
 		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
 		model.addAttribute("loggedUser", util.getPrincipalName());
@@ -75,7 +75,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/edit-{id}-item", method = RequestMethod.GET)
-	public String editItem(@PathVariable int id, ModelMap model) {
+	public String editItem(@PathVariable final int id, ModelMap model) {
 		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
 		model.addAttribute("users", userService.listAll());
@@ -99,7 +99,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/delete-{id}-item", method = RequestMethod.GET)
-	public String deleteItem(@PathVariable int id, RedirectAttributes redirectAttributes) {
+	public String deleteItem(@PathVariable final int id, RedirectAttributes redirectAttributes) {
 		try {
 			itemService.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
@@ -109,13 +109,13 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/item-{id}-forward", method = RequestMethod.GET)
-	public String advanceItemState(@PathVariable int id, RedirectAttributes redirectAttributes) {
+	public String advanceItemState(@PathVariable final int id, RedirectAttributes redirectAttributes) {
 		itemService.itemStateForward(id);
 		return "redirect:/dashboard";
 	}
 
 	@RequestMapping(value = "/item-{id}-backward", method = RequestMethod.GET)
-	public String revertItemState(@PathVariable int id, RedirectAttributes redirectAttributes) {
+	public String revertItemState(@PathVariable final int id, RedirectAttributes redirectAttributes) {
 		itemService.itemStateBack(id);
 		return "redirect:/dashboard";
 	}

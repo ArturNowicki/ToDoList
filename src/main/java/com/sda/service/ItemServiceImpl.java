@@ -20,22 +20,18 @@ public class ItemServiceImpl implements ItemService {
 	private ItemDao dao;
 
 	@Override
-	public Item findById(int id) {
+	public Item findById(final int id) {
 		return dao.findById(id);
 	}
 
 	@Override
 	public void save(Item item) {
-		item.setState(State.NEW);
-		item.setCreated(Date.valueOf(LocalDate.now()));
-		item.setModified(Date.valueOf(LocalDate.now()));
-		item.setCompletedHours(0);
-		item.setRemainingHours(item.getOriginalEstimate());
+		setItemFields(item);
 		dao.add(item);
 	}
 
 	@Override
-	public void deleteById(int id) {
+	public void deleteById(final int id) {
 		dao.deleteById(id);
 	}
 
@@ -45,27 +41,16 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public void update(Item item) {
+	public void update(final Item item) {
 		Item entity = dao.findById(item.getId());
 		if (null != entity) {
-			entity.setAssignedUser(item.getAssignedUser());
-			entity.setBody(item.getBody());
-			entity.setCompletedHours(item.getCompletedHours());
-			entity.setModified(Date.valueOf(LocalDate.now()));
-			if(item.getState().equals(State.NEW)) {
-				entity.setOriginalEstimate(item.getOriginalEstimate());
-			}
-			entity.setPriority(item.getPriority());
-			entity.setRemainingHours(item.getRemainingHours());
-			entity.setSeverity(item.getSeverity());
-			entity.setTags(item.getTags());
-			entity.setType(item.getType());
-			entity.setSeverity(item.getSeverity());
+			setEntityFields(item, entity);
 		}
 	}
+
 	
 	@Override
-	public void itemStateBack(int id) {
+	public void itemStateBack(final int id) {
 		Item entity = dao.findById(id);
 		State currentState = entity.getState();
 		if(!currentState.equals(State.NEW) && !currentState.equals(State.CLOSED)) {
@@ -76,7 +61,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public void itemStateForward(int id) {
+	public void itemStateForward(final int id) {
 		Item entity = dao.findById(id);
 		State currentState = entity.getState();
 		if(!currentState.equals(State.CLOSED)) {
@@ -89,4 +74,27 @@ public class ItemServiceImpl implements ItemService {
 		}
 	}
 
+	private void setItemFields(Item item) {
+		item.setState(State.NEW);
+		item.setCreated(Date.valueOf(LocalDate.now()));
+		item.setModified(Date.valueOf(LocalDate.now()));
+		item.setCompletedHours(0);
+		item.setRemainingHours(item.getOriginalEstimate());
+	}
+
+	private void setEntityFields(final Item item, Item entity) {
+		entity.setAssignedUser(item.getAssignedUser());
+		entity.setBody(item.getBody());
+		entity.setCompletedHours(item.getCompletedHours());
+		entity.setModified(Date.valueOf(LocalDate.now()));
+		if(item.getState().equals(State.NEW)) {
+			entity.setOriginalEstimate(item.getOriginalEstimate());
+		}
+		entity.setPriority(item.getPriority());
+		entity.setRemainingHours(item.getRemainingHours());
+		entity.setSeverity(item.getSeverity());
+		entity.setTags(item.getTags());
+		entity.setType(item.getType());
+		entity.setSeverity(item.getSeverity());
+	}
 }

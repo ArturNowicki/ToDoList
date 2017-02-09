@@ -28,23 +28,23 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Override
-	public User findById(int id) {
+	public User findById(final int id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public EditUserDto getAsEditUserDto(int id) {
+	public EditUserDto getAsEditUserDto(final int id) {
 		User user = findById(id);
 		return new EditUserDto(user.getId(), user.getLogin(), user.getEmail(), user.getUserType());
 	}
 
 	@Override
-	public Optional<User> findByLogin(String login) {
+	public Optional<User> findByLogin(final String login) {
 		return dao.findByLogin(login);
 	}
 
 	@Override
-	public Optional<User> findByEmail(String email) {
+	public Optional<User> findByEmail(final String email) {
 		return dao.findByEmail(email);
 	}
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteById(int id) {
+	public void deleteById(final int id) {
 		dao.deleteById(id);
 	}
 
@@ -65,17 +65,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(final User user) {
 		User entity = dao.findById(user.getId());
 		if (null != entity) {
-			entity.setLogin(user.getLogin());
-			entity.setEmail(user.getEmail());
-			entity.setUserType(user.getUserType());
+			setEntityFields(user, entity);
 		}
 	}
 
 	@Override
-	public void changePassword(User user, String password) {
+	public void changePassword(final User user, final String password) {
 		User entity = dao.findById(user.getId());
 		if (null != entity) {
 			entity.setPassword(encodePassword(password));
@@ -83,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isUserUnique(String login) {
+	public boolean isUserUnique(final String login) {
 		Optional<User> maybeUser = dao.findByLogin(login);
 		if (maybeUser.isPresent()) {
 			return false;
@@ -93,18 +91,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isPasswordMatching(String password, String confirmPassowrd) {
+	public boolean isPasswordMatching(final String password, final String confirmPassowrd) {
 		return password.equals(confirmPassowrd) ? true : false;
 	}
 
 	@Override
-	public void createPasswordResetTokenForUser(User user, String token) {
+	public void createPasswordResetTokenForUser(final User user, final String token) {
 		PasswordResetToken resetToken = new PasswordResetToken(token, user);
 		passwordResetTokenDao.save(resetToken);
 	}
 
-	private String encodePassword(String password) {
+	private String encodePassword(final String password) {
 		return passwordEncoder.encode(password);
+	}
+
+	private void setEntityFields(final User user, User entity) {
+		entity.setLogin(user.getLogin());
+		entity.setEmail(user.getEmail());
+		entity.setUserType(user.getUserType());
 	}
 
 }
