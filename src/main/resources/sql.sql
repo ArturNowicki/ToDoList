@@ -3,6 +3,7 @@ use todo_list;
 drop table if exists ItemTags;
 drop table if exists Item;
 drop table if exists Tag;
+drop table if exists PasswordResetToken;
 drop table if exists User;
 
 CREATE TABLE User(
