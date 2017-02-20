@@ -15,17 +15,8 @@ public enum State {
 		return state;
 	}
 
-	public void setState(String state) {
-		this.state = state;
-	}
-
 	public int getValue() {
 		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-	
+	}	
 	
 }

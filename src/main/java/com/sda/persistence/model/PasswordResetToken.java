@@ -54,7 +54,7 @@ public class PasswordResetToken {
 	}
 
 	public Timestamp getExpiryDate() {
-		return expiryDate;
+		return new Timestamp(expiryDate.getTime());
 	}
 
 	@Override
